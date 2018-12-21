@@ -1,0 +1,16 @@
+---
+- name: client | Downloading Guacamole Client Package
+  get_url:
+    url: "{{ guacamole_dl_url + '/binary/' + guacamole_client_package }}"
+    dest: /etc/guacamole/guacamole.war
+  become: true
+
+- name: client | Creating Tomcat Symlink For {{ 'guacamole-' + guacamole_version + '.war' }}
+  file:
+    src: /etc/guacamole/guacamole.war
+    dest: "{{ '/var/lib/' + guacamole_tomcat + '/webapps/guacamole.war' }}"
+    state: link
+  become: true
+  notify:
+    - "restart {{ guacamole_tomcat }}"
+    - restart guacd
