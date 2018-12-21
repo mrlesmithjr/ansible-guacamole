@@ -1,5 +1,6 @@
+{{ ansible_managed | comment }}
 auth-provider: {{ guacamole_auth_provider }}
-basic-user-mapping: /etc/guacamole/user-mapping.xml
-guacd-hostname: {{ ansible_hostname }}
-guacd-port: {{ guacamole_server_port }}
+# basic-user-mapping: /etc/guacamole/user-mapping.xml
+# guacd-hostname: {{ ansible_hostname }}
+# guacd-port: {{ guacamole_server_port }}
 user-mapping: /etc/guacamole/user-mapping.xml
