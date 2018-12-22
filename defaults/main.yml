@@ -1,10 +1,31 @@
 ---
 # defaults file for ansible-guacamole
+
+# Authentication MySQL
+guacamole_auth_jdbc_package: "{{ 'guacamole-auth-jdbc-' + guacamole_version + '.tar.gz' }}"
+
 guacamole_auth_provider: net.sourceforge.guacamole.net.basic.BasicFileAuthenticationProvider
 
 guacamole_client_package: "{{ 'guacamole-' + guacamole_version + '.war' }}"
 
 guacamole_dl_url: "{{ 'http://apache.org/dyn/closer.cgi?action=download&filename=guacamole/' + guacamole_version }}"
+
+# Defines if MySQL DB should be used for authentication
+guacamole_mysql_auth: false
+
+guacamole_mysql_connector_package: "{{ guacamole_mysql_connector_dl_url + 'mysql-connector-java-' + guacamole_mysql_connector_version + '.tar.gz' }}"
+
+guacamole_mysql_connector_dl_url: https://dev.mysql.com/get/Downloads/Connector-J/
+
+guacamole_mysql_connector_version: 8.0.13
+
+# Define MySQL DB Info
+guacamole_mysql_db:
+  name: guacamole
+  host: localhost
+  port: 3306
+  username: guacamole
+  password: guacamole
 
 # RDP settings
 guacamole_rdp_color_depth: 24
