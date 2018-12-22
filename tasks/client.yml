@@ -9,6 +9,8 @@
   file:
     src: /etc/guacamole/guacamole.war
     dest: "{{ '/var/lib/' + guacamole_tomcat + '/webapps/guacamole.war' }}"
+    owner: "{{ guacamole_tomcat }}"
+    group: "{{ guacamole_tomcat }}"
     state: link
   become: true
   notify:
