@@ -112,8 +112,8 @@
     - 001-create-schema.sql
     - 002-create-admin-user.sql
   when: >
-        guacamole_mysql_auth and
-        not _guacamole_db_populated_check['stat']['exists']
+    guacamole_mysql_auth and
+    not _guacamole_db_populated_check['stat']['exists']
 
 - name: config | Marking DB As Populated
   file:
@@ -121,8 +121,8 @@
     state: touch
   become: true
   when: >
-        guacamole_mysql_auth and
-        _guacamole_db_populated['changed']
+    guacamole_mysql_auth and
+    _guacamole_db_populated['changed']
 
 - name: config | Creating Tomcat symlink For guacamole.properties
   file:

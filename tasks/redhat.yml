@@ -1,7 +1,7 @@
 ---
 - name: redhat | Enabling EPEL Repo
   yum:
-    name: ['epel-release']
+    name: ["epel-release"]
     state: present
   become: true
   register: result

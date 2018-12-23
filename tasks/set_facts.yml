@@ -3,19 +3,19 @@
   set_fact:
     guacamole_tomcat: tomcat7
   when: >
-        (ansible_distribution == "Debian" and
-        ansible_distribution_version < "9") or
-        (ansible_distribution == "Ubuntu" and
-        ansible_distribution_version < "18.04")
+    (ansible_distribution == "Debian" and
+    ansible_distribution_version < "9") or
+    (ansible_distribution == "Ubuntu" and
+    ansible_distribution_version < "18.04")
 
 - name: set_facts | Setting Ubuntu Facts
   set_fact:
     guacamole_tomcat: tomcat8
   when: >
-        (ansible_distribution == "Debian" and
-        ansible_distribution_version >= "9") or
-        (ansible_distribution == "Ubuntu" and
-        ansible_distribution_version >= "18.04")
+    (ansible_distribution == "Debian" and
+    ansible_distribution_version >= "9") or
+    (ansible_distribution == "Ubuntu" and
+    ansible_distribution_version >= "18.04")
 
 - name: set_facts | Setting RedHat Facts
   set_fact:
@@ -45,8 +45,8 @@
       - libvorbis-dev
       - libwebp-dev
   when: >
-        ansible_distribution == "Debian" and
-        ansible_distribution_version < "9"
+    ansible_distribution == "Debian" and
+    ansible_distribution_version < "9"
 
 - name: set_facts | Setting Debian Packages
   set_fact:
@@ -71,8 +71,8 @@
       - libvorbis-dev
       - libwebp-dev
   when: >
-        ansible_distribution == "Debian" and
-        ansible_distribution_version >= "9"
+    ansible_distribution == "Debian" and
+    ansible_distribution_version >= "9"
 
 - name: set_facts | Setting Ubuntu Packages
   set_fact:
@@ -99,8 +99,8 @@
       - libvorbis-dev
       - libwebp-dev
   when: >
-        ansible_distribution == "Ubuntu" and
-        ansible_distribution_version < "18.04"
+    ansible_distribution == "Ubuntu" and
+    ansible_distribution_version < "18.04"
 
 - name: set_facts | Setting Ubuntu Packages
   set_fact:
@@ -125,5 +125,5 @@
       - libvorbis-dev
       - libwebp-dev
   when: >
-        ansible_distribution == "Ubuntu" and
-        ansible_distribution_version >= "18.04"
+    ansible_distribution == "Ubuntu" and
+    ansible_distribution_version >= "18.04"
