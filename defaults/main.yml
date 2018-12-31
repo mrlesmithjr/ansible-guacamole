@@ -75,7 +75,11 @@ guacamole_users: []
 #       name: windows2016
 #       protocol: rdp
 #       port: 3389
-
+#     - host: 192.168.250.11
+#       name: 192.168.250.11
+#       protocol: vnc
+#       port: 5901
+#       password: password
 # Define version to install
 # 0.9.13-incubating | 0.9.14
 guacamole_version: 0.9.14
