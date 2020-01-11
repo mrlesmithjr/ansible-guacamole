@@ -14,6 +14,7 @@
             <param name="height">{{ guacamole_rdp_height }}</param>
             <param name="width">{{ guacamole_rdp_width }}</param>
             <param name="security">{{ guacamole_rdp_security }}</param>
+            <param name="ignore-cert">{{ guacamole_rdp_ignore_cert | default('false') }}</param>
             <param name="disable-auth">{{ guacamole_rdp_disable_auth|lower }}</param>
 {%         endif %}
 {%         if connection['protocol'] == "vnc" %}
