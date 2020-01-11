@@ -84,4 +84,4 @@ guacamole_users: []
 #       password: password
 # Define version to install
 # 0.9.13-incubating | 0.9.14
-guacamole_version: 0.9.14
+guacamole_version: 1.0.0
