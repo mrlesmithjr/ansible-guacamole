@@ -1,8 +1,12 @@
 {{ ansible_managed | comment }}
 auth-provider: {{ guacamole_auth_provider }}
-# basic-user-mapping: /etc/guacamole/user-mapping.xml
-# guacd-hostname: {{ ansible_hostname }}
-# guacd-port: {{ guacamole_server_port }}
+{% if guacamole_basic_user_mapping is defined and guacamole_basic_user_mapping|string %}
+basic-user-mapping: {{ guacamole_basic_user_mapping }}
+{% endif %}
+guacd-hostname: {{ ansible_hostname }}
+{% if guacamole_server_port is defined and guacamole_server_port|int %}
+guacd-port: {{ guacamole_server_port }}
+{% endif %}
 user-mapping: /etc/guacamole/user-mapping.xml
 {% if guacamole_mysql_auth %}
 mysql-hostname: {{ guacamole_mysql_db['host'] }}
