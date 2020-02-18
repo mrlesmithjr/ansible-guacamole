@@ -1,15 +1,15 @@
 ---
 galaxy_info:
   author: Larry Smith Jr.
-  description: An Ansible role to install/configure Apache Guacamole
-
+  description: Ansible role to install/configure Guacamole
   license: MIT
 
-  min_ansible_version: 1.2
+  min_ansible_version: 2.5
 
   platforms:
     - name: Debian
       versions:
+        - buster
         - jessie
         - stretch
     - name: EL
@@ -17,6 +17,7 @@ galaxy_info:
         - 7
     - name: Ubuntu
       versions:
+        - bionic
         - xenial
 
   galaxy_tags:

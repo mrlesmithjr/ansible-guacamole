@@ -23,3 +23,9 @@
     name: tomcat8
     state: restarted
   become: true
+
+- name: restart tomcat9
+  service:
+    name: tomcat9
+    state: restarted
+  become: true

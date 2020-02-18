@@ -3,8 +3,8 @@
   file:
     path: "{{ item }}"
     state: directory
-    owner: "{{ guacamole_tomcat }}"
-    group: "{{ guacamole_tomcat }}"
+    owner: "{{ guacamole_tomcat_user }}"
+    group: "{{ guacamole_tomcat_user }}"
   become: true
   with_items:
     - /etc/guacamole
@@ -15,22 +15,22 @@
   template:
     src: etc/guacamole/guacamole.properties.j2
     dest: /etc/guacamole/guacamole.properties
-    owner: "{{ guacamole_tomcat }}"
-    group: "{{ guacamole_tomcat }}"
+    owner: "{{ guacamole_tomcat_user }}"
+    group: "{{ guacamole_tomcat_user }}"
   become: true
   notify:
-    - "restart {{ guacamole_tomcat }}"
+    - "restart {{ guacamole_tomcat_service }}"
     - restart guacd
 
 - name: config | Configuring user-mapping.xml
   template:
     src: etc/guacamole/user-mapping.xml.j2
     dest: /etc/guacamole/user-mapping.xml
-    owner: "{{ guacamole_tomcat }}"
-    group: "{{ guacamole_tomcat }}"
+    owner: "{{ guacamole_tomcat_user }}"
+    group: "{{ guacamole_tomcat_user }}"
   become: true
   notify:
-    - "restart {{ guacamole_tomcat }}"
+    - "restart {{ guacamole_tomcat_service }}"
     - restart guacd
   when: not guacamole_mysql_auth
 
@@ -46,8 +46,8 @@
   copy:
     src: "{{ guacamole_src_dir + '/' + 'guacamole-auth-jdbc-' + guacamole_version + '/mysql/' + 'guacamole-auth-jdbc-mysql-' + guacamole_version + '.jar' }}"
     dest: /etc/guacamole/extensions/
-    owner: "{{ guacamole_tomcat }}"
-    group: "{{ guacamole_tomcat }}"
+    owner: "{{ guacamole_tomcat_user }}"
+    group: "{{ guacamole_tomcat_user }}"
     remote_src: true
   become: true
   when: guacamole_mysql_auth
@@ -64,8 +64,8 @@
   copy:
     src: "{{ guacamole_src_dir + '/' + 'mysql-connector-java-' + guacamole_mysql_connector_version + '/' +'mysql-connector-java-' + guacamole_mysql_connector_version + '.jar' }}"
     dest: /etc/guacamole/lib/
-    owner: "{{ guacamole_tomcat }}"
-    group: "{{ guacamole_tomcat }}"
+    owner: "{{ guacamole_tomcat_user }}"
+    group: "{{ guacamole_tomcat_user }}"
     remote_src: true
   become: true
   when: guacamole_mysql_auth
@@ -106,7 +106,7 @@
   become: true
   register: _guacamole_db_populated
   notify:
-    - "restart {{ guacamole_tomcat }}"
+    - "restart {{ guacamole_tomcat_service }}"
     - restart guacd
   with_items:
     - 001-create-schema.sql
@@ -129,9 +129,9 @@
     src: /etc/guacamole
     dest: "{{ '/usr/share/' + guacamole_tomcat + '/.guacamole' }}"
     state: link
-    owner: "{{ guacamole_tomcat }}"
-    group: "{{ guacamole_tomcat }}"
+    owner: "{{ guacamole_tomcat_user }}"
+    group: "{{ guacamole_tomcat_user }}"
   become: true
   notify:
-    - "restart {{ guacamole_tomcat }}"
+    - "restart {{ guacamole_tomcat_service }}"
     - restart guacd

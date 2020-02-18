@@ -12,13 +12,13 @@
     state: link
   become: true
   notify:
-    - "restart {{ guacamole_tomcat }}"
+    - "restart {{ guacamole_tomcat_service }}"
     - restart guacd
 
 # Moving here to ensure idempotency as it was failing when included above
 - name: client | Setting Permissions On Tomcat Symlink For {{ 'guacamole-' + guacamole_version + '.war' }}
   file:
     path: /etc/guacamole/guacamole.war
-    owner: "{{ guacamole_tomcat }}"
-    group: "{{ guacamole_tomcat }}"
+    owner: "{{ guacamole_tomcat_user }}"
+    group: "{{ guacamole_tomcat_user }}"
   become: true
