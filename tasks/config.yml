@@ -62,7 +62,7 @@
 
 - name: config | Copying MySQL Connector
   copy:
-    src: "{{ guacamole_src_dir + '/' + 'mysql-connector-java-' + guacamole_mysql_connector_version + '/' +'mysql-connector-java-' + guacamole_mysql_connector_version + '.jar' }}"
+    src: "{{ guacamole_src_dir + '/' + 'mysql-connector-java-' + guacamole_mysql_connector_version + '/' +'mysql-connector-java-' + guacamole_mysql_connector_version + '.jar' }}" # noqa 204
     dest: /etc/guacamole/lib/
     owner: "{{ guacamole_tomcat_user }}"
     group: "{{ guacamole_tomcat_user }}"
@@ -115,7 +115,7 @@
     guacamole_mysql_auth and
     not _guacamole_db_populated_check['stat']['exists']
 
-- name: config | Marking DB As Populated
+- name: config | Marking DB As Populated # noqa 503
   file:
     path: /etc/guacamole/.db_populated
     state: touch
