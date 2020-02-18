@@ -4,6 +4,8 @@
     url: "{{ guacamole_dl_url + '/binary/' + guacamole_client_package }}"
     dest: /etc/guacamole/guacamole.war
   become: true
+  register: dl
+  until: dl is success
 
 - name: client | Creating Tomcat Symlink For {{ 'guacamole-' + guacamole_version + '.war' }}
   file:
