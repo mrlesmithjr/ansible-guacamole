@@ -38,25 +38,6 @@ guacamole_redhat_fusion_repos:
   - https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm
   - https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-7.noarch.rpm
 
-guacamole_redhat_pre_reqs:
-  - "{{ guacamole_tomcat }}"
-  - cairo-devel
-  - ffmpeg-devel
-  - freerdp-devel
-  - gcc
-  - libjpeg-turbo-devel
-  - libpng-devel
-  - libssh2-devel
-  - libtelnet-devel
-  - libvncserver-devel
-  - libvorbis-devel
-  - libwebp-devel
-  # - maven
-  - openssl-devel
-  - pango-devel
-  - pulseaudio-libs-devel
-  - uuid-devel
-
 guacamole_server_package: "{{ 'guacamole-server-' + guacamole_version + '.tar.gz' }}"
 
 guacamole_server_port: 4822
@@ -83,5 +64,5 @@ guacamole_users: []
 #       port: 5901
 #       password: password
 # Define version to install
-# 0.9.13-incubating | 0.9.14
-guacamole_version: 1.0.0
+# 0.9.13-incubating | 0.9.14 | 1.0.0 | 1.1.0
+guacamole_version: 1.1.0

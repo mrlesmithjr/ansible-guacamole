@@ -1,37 +1,59 @@
 ---
-- name: set_facts | Setting Ubuntu Facts
+- name: set_facts | Setting Debian/Ubuntu Facts
   set_fact:
+    guacamole_freerdp: freerdp-x11
+    guacamole_freerdp_dev: libfreerdp-dev
     guacamole_tomcat: tomcat7
+    guacamole_tomcat_service: tomcat7
+    guacamole_tomcat_user: tomcat7
   when: >
     (ansible_distribution == "Debian" and
-    ansible_distribution_version < "9") or
+    ansible_distribution_version is version('9', '<')) or
     (ansible_distribution == "Ubuntu" and
-    ansible_distribution_version < "18.04")
+    ansible_distribution_version is version('18.04', '<'))
 
-- name: set_facts | Setting Ubuntu Facts
+- name: set_facts | Setting Debian/Ubuntu Facts
   set_fact:
+    guacamole_freerdp: freerdp-x11
+    guacamole_freerdp_dev: libfreerdp-dev
     guacamole_tomcat: tomcat8
+    guacamole_tomcat_service: tomcat8
+    guacamole_tomcat_user: tomcat8
   when: >
     (ansible_distribution == "Debian" and
-    ansible_distribution_version >= "9") or
+    ansible_distribution_version is version('9', '==')) or
     (ansible_distribution == "Ubuntu" and
-    ansible_distribution_version >= "18.04")
+    ansible_distribution_version is version('18.04', '>='))
+
+- name: set_facts | Setting Debian/Ubuntu Facts
+  set_fact:
+    guacamole_freerdp: freerdp2-x11
+    guacamole_freerdp_dev: freerdp2-dev
+    guacamole_tomcat: tomcat9
+    guacamole_tomcat_service: tomcat9
+    guacamole_tomcat_user: tomcat
+  when:
+    - ansible_distribution == "Debian"
+    - ansible_distribution_version is version('9', '>')
 
 - name: set_facts | Setting RedHat Facts
   set_fact:
     guacamole_tomcat: tomcat
-  when: ansible_os_family == "RedHat"
+    guacamole_tomcat_service: tomcat
+    guacamole_tomcat_user: tomcat
+  when:
+    - ansible_os_family == "RedHat"
 
 - name: set_facts | Setting Debian Packages
   set_fact:
     guacamole_debian_pre_reqs:
       - "{{ guacamole_tomcat }}"
       - build-essential
-      - freerdp-x11
+      - "{{ guacamole_freerdp }}"
       - libavcodec-dev
       - libavutil-dev
       - libcairo2-dev
-      - libfreerdp-dev
+      - "{{ guacamole_freerdp_dev }}"
       - libjpeg62-turbo-dev
       - libossp-uuid-dev
       - libpango1.0-dev
@@ -44,20 +66,20 @@
       - libvncserver-dev
       - libvorbis-dev
       - libwebp-dev
-  when: >
-    ansible_distribution == "Debian" and
-    ansible_distribution_version < "9"
+  when:
+    - ansible_distribution == "Debian"
+    - ansible_distribution_version is version('9', '<')
 
 - name: set_facts | Setting Debian Packages
   set_fact:
     guacamole_debian_pre_reqs:
       - "{{ guacamole_tomcat }}"
       - build-essential
-      - freerdp-x11
+      - "{{ guacamole_freerdp }}"
       - libavcodec-dev
       - libavutil-dev
       - libcairo2-dev
-      - libfreerdp-dev
+      - "{{ guacamole_freerdp_dev }}"
       - libjpeg62-turbo-dev
       - libossp-uuid-dev
       - libpango1.0-dev
@@ -70,9 +92,9 @@
       - libvncserver-dev
       - libvorbis-dev
       - libwebp-dev
-  when: >
-    ansible_distribution == "Debian" and
-    ansible_distribution_version >= "9"
+  when:
+    - ansible_distribution == "Debian"
+    - ansible_distribution_version is version('9', '>=')
 
 - name: set_facts | Setting Ubuntu Packages
   set_fact:
@@ -80,12 +102,12 @@
       - "{{ guacamole_tomcat }}"
       - build-essential
       - dpkg-dev
-      - freerdp-x11
+      - "{{ guacamole_freerdp }}"
       - ghostscript
       - libavcodec-dev
       - libavutil-dev
       - libcairo2-dev
-      - libfreerdp-dev
+      - "{{ guacamole_freerdp_dev }}"
       - libjpeg-turbo8-dev
       - libossp-uuid-dev
       - libpango1.0-dev
@@ -98,20 +120,20 @@
       - libvncserver-dev
       - libvorbis-dev
       - libwebp-dev
-  when: >
-    ansible_distribution == "Ubuntu" and
-    ansible_distribution_version < "18.04"
+  when:
+    - ansible_distribution == "Ubuntu"
+    - ansible_distribution_version is version('18.04', '<')
 
 - name: set_facts | Setting Ubuntu Packages
   set_fact:
     guacamole_debian_pre_reqs:
       - "{{ guacamole_tomcat }}"
       - build-essential
-      - freerdp-x11
+      - "{{ guacamole_freerdp }}"
       - libavcodec-dev
       - libavutil-dev
       - libcairo2-dev
-      - libfreerdp-dev
+      - "{{ guacamole_freerdp_dev }}"
       - libjpeg-turbo8-dev
       - libossp-uuid-dev
       - libpango1.0-dev
@@ -124,6 +146,30 @@
       - libvncserver-dev
       - libvorbis-dev
       - libwebp-dev
-  when: >
-    ansible_distribution == "Ubuntu" and
-    ansible_distribution_version >= "18.04"
+  when:
+    - ansible_distribution == "Ubuntu"
+    - ansible_distribution_version is version('18.04', '>=')
+
+- name: set_facts | Setting RedHat Packages
+  set_fact:
+    guacamole_redhat_pre_reqs:
+      - "{{ guacamole_tomcat }}"
+      - cairo-devel
+      - ffmpeg-devel
+      - freerdp-devel
+      - gcc
+      - libjpeg-turbo-devel
+      - libpng-devel
+      - libssh2-devel
+      - libtelnet-devel
+      - libvncserver-devel
+      - libvorbis-devel
+      - libwebp-devel
+      - make
+      # - maven
+      - openssl-devel
+      - pango-devel
+      - pulseaudio-libs-devel
+      - uuid-devel
+  when:
+    - ansible_os_family == "RedHat"
