@@ -1,7 +1,9 @@
 ---
-- hosts: guac_servers
+- name: Example Playbook
+  hosts: all
   vars:
-    pri_domain_name: test.vagrant.local
+    guacamole_mysql_auth: false
   roles:
     - role: ansible-mysql
+      when: guacamole_mysql_auth|bool
     - role: ansible-guacamole
