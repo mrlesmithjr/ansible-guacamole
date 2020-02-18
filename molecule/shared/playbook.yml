@@ -1,0 +1,10 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    guacamole_mysql_auth: false
+    guacamole_version: 1.1.0
+  roles:
+    - role: ansible-mysql
+      when: guacamole_mysql_auth|bool
+    - role: ansible-guacamole
