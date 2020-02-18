@@ -39,7 +39,7 @@
 - name: set_facts | Setting RedHat Facts
   set_fact:
     guacamole_tomcat: tomcat
-    guacamole_tomcat_service: tomcat7
+    guacamole_tomcat_service: tomcat
     guacamole_tomcat_user: tomcat
   when:
     - ansible_os_family == "RedHat"
