@@ -26,14 +26,14 @@
   when: not _guacamole_server_installed['stat']['exists']
 
 - name: install | Compiling Guacamole Server
-  make:
+  make: # noqa 503
     chdir: "{{ guacamole_src_dir + '/guacamole-server-' + guacamole_version }}"
   become: true
   register: _guacamole_server_compiled
   when: _guacamole_config_server_build['changed']
 
 - name: install | Installing Guacamole Server
-  make:
+  make: # noqa 503
     chdir: "{{ guacamole_src_dir + '/guacamole-server-' + guacamole_version }}"
     target: install
   become: true
@@ -41,6 +41,6 @@
   when: _guacamole_server_compiled['changed']
 
 - name: install | Running ldconfig
-  command: ldconfig
+  command: ldconfig # noqa 503
   become: true
   when: _guacamole_server_installed['changed']
