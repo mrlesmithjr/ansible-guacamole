@@ -20,6 +20,7 @@
   become: true
   notify:
     - "restart {{ guacamole_tomcat_service }}"
+    - kill guacd
     - restart guacd
 
 - name: config | Configuring user-mapping.xml
@@ -31,6 +32,7 @@
   become: true
   notify:
     - "restart {{ guacamole_tomcat_service }}"
+    - kill guacd
     - restart guacd
   when: not guacamole_mysql_auth
 
@@ -107,6 +109,7 @@
   register: _guacamole_db_populated
   notify:
     - "restart {{ guacamole_tomcat_service }}"
+    - kill guacd
     - restart guacd
   with_items:
     - 001-create-schema.sql
@@ -134,4 +137,5 @@
   become: true
   notify:
     - "restart {{ guacamole_tomcat_service }}"
+    - kill guacd
     - restart guacd

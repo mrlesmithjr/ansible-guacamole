@@ -15,6 +15,7 @@
   become: true
   notify:
     - "restart {{ guacamole_tomcat_service }}"
+    - kill guacd
     - restart guacd
 
 # Moving here to ensure idempotency as it was failing when included above
