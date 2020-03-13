@@ -15,7 +15,7 @@
 - name: set_facts | Setting Debian/Ubuntu Facts
   set_fact:
     guacamole_freerdp: freerdp-x11
-    guacamole_freerdp_dev: libfreerdp-dev
+    guacamole_freerdp_dev: freerdp2-dev
     guacamole_tomcat: tomcat8
     guacamole_tomcat_service: tomcat8
     guacamole_tomcat_user: tomcat8
