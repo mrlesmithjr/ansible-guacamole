@@ -1,7 +1,7 @@
 ---
 # handlers file for ansible-guacamole
 - name: kill guacd
-  command: killall guacd
+  command: pkill guacd
   become: true
 
 - name: restart guacd
