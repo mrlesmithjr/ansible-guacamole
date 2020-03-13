@@ -10,6 +10,8 @@ guacamole_client_package: "{{ 'guacamole-' + guacamole_version + '.war' }}"
 
 guacamole_dl_url: "{{ 'http://apache.org/dyn/closer.cgi?action=download&filename=guacamole/' + guacamole_version }}"
 
+guacamole_server_hostname: localhost
+
 # Defines if MySQL DB should be used for authentication
 guacamole_mysql_auth: false
 
@@ -33,6 +35,7 @@ guacamole_rdp_disable_auth: false
 guacamole_rdp_height: 900
 guacamole_rdp_width: 1440
 guacamole_rdp_security: rdp
+guacamole_rdp_ignore_cert: false
 
 guacamole_redhat_fusion_repos:
   - https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm

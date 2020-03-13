@@ -11,15 +11,19 @@
             <param name="port">{{ connection['port'] }}</param>
 {%         if connection['protocol'] == "rdp" %}
             <param name="color-depth">{{ guacamole_rdp_color_depth }}</param>
-            <param name="height">{{ guacamole_rdp_height }}</param>
-            <param name="width">{{ guacamole_rdp_width }}</param>
             <param name="security">{{ guacamole_rdp_security }}</param>
-            <param name="ignore-cert">{{ guacamole_rdp_ignore_cert | default('false') }}</param>
+            <param name="ignore-cert">{{ guacamole_rdp_ignore_cert |lower }}</param>
             <param name="disable-auth">{{ guacamole_rdp_disable_auth|lower }}</param>
 {%         endif %}
-{%         if connection['protocol'] == "vnc" %}
 {%           if connection['password'] is defined %}
             <param name="password">{{ connection['password'] }}</param>
+{%           endif %}
+{%           if connection['username'] is defined %}
+            <param name="username">{{ connection['username'] }}</param>
+{%           endif %}
+{%         if connection['protocol'] == "ssh" %}
+{%           if connection['private_key'] is defined %}
+            <param name="private-key">{{ connection['private_key'] }}</param>
 {%           endif %}
 {%         endif %}
         </connection>

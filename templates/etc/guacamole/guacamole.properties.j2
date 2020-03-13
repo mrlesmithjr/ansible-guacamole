@@ -3,7 +3,7 @@ auth-provider: {{ guacamole_auth_provider }}
 {% if guacamole_basic_user_mapping is defined and guacamole_basic_user_mapping|string %}
 basic-user-mapping: {{ guacamole_basic_user_mapping }}
 {% endif %}
-guacd-hostname: {{ ansible_hostname }}
+guacd-hostname: {{ guacamole_server_hostname }}
 {% if guacamole_server_port is defined and guacamole_server_port|int %}
 guacd-port: {{ guacamole_server_port }}
 {% endif %}
