@@ -11,6 +11,18 @@
     - /etc/guacamole/lib
     - /etc/guacamole/extensions
 
+- name: config | Configuring server.xml
+  template:
+    src: etc/tomcat/server.xml.j2
+    dest: "/etc/{{ guacamole_tomcat }}/server.xml"
+    owner: "{{ guacamole_tomcat_user }}"
+    group: "{{ guacamole_tomcat_user }}"
+  become: true
+  notify:
+    - "restart {{ guacamole_tomcat_service }}"
+    - kill guacd
+    - restart guacd
+
 - name: config | Configuring guacamole.properties
   template:
     src: etc/guacamole/guacamole.properties.j2
