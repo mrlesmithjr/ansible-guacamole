@@ -3,7 +3,6 @@
   hosts: all
   vars:
     guacamole_mysql_auth: false
-    guacamole_https_enabled: false
   roles:
     - role: ansible-mysql
       when: guacamole_mysql_auth|bool

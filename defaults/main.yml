@@ -69,6 +69,3 @@ guacamole_users: []
 # Define version to install
 # 0.9.13-incubating | 0.9.14 | 1.0.0 | 1.1.0
 guacamole_version: 1.1.0
-
-# HTTPS support
-guacamole_https_enabled: false

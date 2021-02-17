@@ -169,9 +169,9 @@
                prefix="localhost_access_log" suffix=".txt"
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />
 
-{% if guacamole_https_enabled %}
+{% if guacamole_proxy_adresses %}
         <Valve className="org.apache.catalina.valves.RemoteIpValve"
-               internalProxies="{{ guacamole_https_proxies }}"
+               internalProxies="{{ guacamole_proxy_adresses }}"
                remoteIpHeader="x-forwarded-for"
                remoteIpProxiesHeader="x-forwarded-by"
                protocolHeader="x-forwarded-proto" />
