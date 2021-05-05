@@ -9,11 +9,11 @@ galaxy_info:
   min_ansible_version: 2.5
 
   platforms:
-    - name: Debian
-      versions:
-        - buster
-        - jessie
-        - stretch
+    # - name: Debian
+    #   versions:
+    #     - buster
+    #     - jessie
+    #     - stretch
     - name: EL
       versions:
         - 7
