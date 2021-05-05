@@ -3,6 +3,8 @@ galaxy_info:
   author: Larry Smith Jr.
   description: Ansible role to install/configure Guacamole
   license: MIT
+  role_name: guacamole
+  namespace: mrlesmithjr
 
   min_ansible_version: 2.5
 
