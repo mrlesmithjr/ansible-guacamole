@@ -12,6 +12,13 @@ guacamole_dl_url: "{{ 'http://apache.org/dyn/closer.cgi?action=download&filename
 
 guacamole_server_hostname: localhost
 
+# Authentication OpenID
+guacamole_auth_openid_package: "{{ 'guacamole-auth-openid-' + guacamole_version + '.tar.gz' }}"
+
+guacamole_openid_auth: false
+
+guacamole_auth_openid_priority: ""
+
 # Defines if MySQL DB should be used for authentication
 guacamole_mysql_auth: false
 
@@ -28,6 +35,17 @@ guacamole_mysql_db:
   port: 3306
   username: guacamole
   password: guacamole
+
+# Define OpenID Info
+guacamole_openid:
+  authorization-endpoint:
+  jwks-endpoint:
+  issuer:
+  client-id:
+  redirect-uri:
+  username-claim-type: preferred_username
+  groups-claim-type: groups
+  allowed-clock-skew: 500
 
 # RDP settings
 guacamole_rdp_color_depth: 24

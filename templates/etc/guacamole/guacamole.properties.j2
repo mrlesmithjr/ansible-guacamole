@@ -15,3 +15,13 @@ mysql-database: {{ guacamole_mysql_db['name'] }}
 mysql-username: {{ guacamole_mysql_db['username'] }}
 mysql-password: {{ guacamole_mysql_db['password'] }}
 {% endif %}
++{% if guacamole_openid_auth %}
++openid-authorization-endpoint: {{ guacamole_openid['authorization-endpoint'] }}
++openid-jwks-endpoint: {{ guacamole_openid['jwks-endpoint'] }}
++openid-issuer: {{ guacamole_openid['issuer'] }}
++openid-client-id: {{ guacamole_openid['client-id'] }}
++openid-redirect-uri: {{ guacamole_openid['redirect-uri'] }}
++openid-username-claim-type: {{ guacamole_openid['username-claim-type'] }}
++openid-groups-claim-type: {{ guacamole_openid['groups-claim-type'] }}
++openid-allowed-clock-skew: {{ guacamole_openid['allowed-clock-skew'] }}
++{% endif %}

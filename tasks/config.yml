@@ -72,6 +72,24 @@
   become: true
   when: guacamole_mysql_auth
 
+- name: config | Downloading Auth OpenID Library
+  unarchive:
+    src: "{{ guacamole_dl_url + '/binary/' + guacamole_auth_openid_package }}"
+    dest: "{{ guacamole_src_dir }}"
+    remote_src: true
+  become: true
+  when: guacamole_openid_auth
+
+- name: config | Copying Auth OpenID Connector
+  copy:
+    src: "{{ guacamole_src_dir + '/' + 'guacamole-auth-openid-' + guacamole_version + '/' + 'guacamole-auth-openid-' + guacamole_version + '.jar' }}"
+    dest: "{{ '/etc/guacamole/extensions/' + guacamole_auth_openid_priority + 'guacamole-auth-openid-' + guacamole_version + '.jar' }}"
+    owner: "{{ guacamole_tomcat_user }}"
+    group: "{{ guacamole_tomcat_user }}"
+    remote_src: true
+  become: true
+  when: guacamole_openid_auth
+
 - name: config | Creating Guacamole DB
   mysql_db:
     name: "{{ guacamole_mysql_db['name'] }}"
