@@ -15,6 +15,14 @@ mysql-database: {{ guacamole_mysql_db['name'] }}
 mysql-username: {{ guacamole_mysql_db['username'] }}
 mysql-password: {{ guacamole_mysql_db['password'] }}
 {% endif %}
++{% if guacamole_postgresql_auth %}
++postgresql-hostname: {{ guacamole_postgresql_db['host'] }}
++postgresql-port: {{ guacamole_postgresql_db['port'] }}
++postgresql-database: {{ guacamole_postgresql_db['name'] }}
++postgresql-username: {{ guacamole_postgresql_db['username'] }}
++postgresql-password: {{ guacamole_postgresql_db['password'] }}
++postgresql-auto-create-accounts: {{ guacamole_postgresql_db['auto-create-accounts'] }}
++{% endif %}
 +{% if guacamole_openid_auth %}
 +openid-authorization-endpoint: {{ guacamole_openid['authorization-endpoint'] }}
 +openid-jwks-endpoint: {{ guacamole_openid['jwks-endpoint'] }}
