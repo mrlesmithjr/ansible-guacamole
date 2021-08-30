@@ -34,7 +34,7 @@
     - "restart {{ guacamole_tomcat_service }}"
     - kill guacd
     - restart guacd
-  when: not guacamole_mysql_auth
+  when: not guacamole_mysql_auth and not guacamole_postgresql_auth
 
 - name: config | Downloading Auth JDBC Library
   unarchive:
@@ -42,7 +42,7 @@
     dest: "{{ guacamole_src_dir }}"
     remote_src: true
   become: true
-  when: guacamole_mysql_auth
+  when: guacamole_mysql_auth or guacamole_postgresql_auth
 
 - name: config | Copying Auth JDBC Connector
   copy:
@@ -53,6 +53,16 @@
     remote_src: true
   become: true
   when: guacamole_mysql_auth
+
+- name: config | Copying Auth JDBC Connector
+  copy:
+    src: "{{ guacamole_src_dir + '/' + 'guacamole-auth-jdbc-' + guacamole_version + '/postgresql/' + 'guacamole-auth-jdbc-postgresql-' + guacamole_version + '.jar' }}"
+    dest: /etc/guacamole/extensions/
+    owner: "{{ guacamole_tomcat_user }}"
+    group: "{{ guacamole_tomcat_user }}"
+    remote_src: true
+  become: true
+  when: guacamole_postgresql_auth
 
 - name: config | Downloading MySQL Connector
   unarchive:
@@ -72,6 +82,41 @@
   become: true
   when: guacamole_mysql_auth
 
+- name: config | Downloading PostgreSQL Connector
+  get_url:
+    url: "{{ guacamole_postgresql_connector_package }}"
+    dest: "{{ guacamole_src_dir }}"
+  become: true
+  when: guacamole_postgresql_auth
+
+- name: config | Copying PostgreSQL Connector
+  copy:
+    src: "{{ guacamole_src_dir + '/' + 'postgresql-' + guacamole_postgresql_connector_version + '.jar' }}"
+    dest: /etc/guacamole/lib/
+    owner: "{{ guacamole_tomcat_user }}"
+    group: "{{ guacamole_tomcat_user }}"
+    remote_src: true
+  become: true
+  when: guacamole_postgresql_auth
+
+- name: config | Downloading Auth OpenID Library
+  unarchive:
+    src: "{{ guacamole_dl_url + '/binary/' + guacamole_auth_openid_package }}"
+    dest: "{{ guacamole_src_dir }}"
+    remote_src: true
+  become: true
+  when: guacamole_openid_auth
+
+- name: config | Copying Auth OpenID Connector
+  copy:
+    src: "{{ guacamole_src_dir + '/' + 'guacamole-auth-openid-' + guacamole_version + '/' + 'guacamole-auth-openid-' + guacamole_version + '.jar' }}"
+    dest: "{{ '/etc/guacamole/extensions/' + guacamole_auth_openid_priority + 'guacamole-auth-openid-' + guacamole_version + '.jar' }}"
+    owner: "{{ guacamole_tomcat_user }}"
+    group: "{{ guacamole_tomcat_user }}"
+    remote_src: true
+  become: true
+  when: guacamole_openid_auth
+
 - name: config | Creating Guacamole DB
   mysql_db:
     name: "{{ guacamole_mysql_db['name'] }}"
@@ -80,6 +125,14 @@
     state: present
   become: true
   when: guacamole_mysql_auth
+
+- name: config | Creating Guacamole DB
+  postgresql_db:
+    name: "{{ guacamole_postgresql_db['name'] }}"
+    state: present
+  become: true
+  become_user: postgres
+  when: guacamole_postgresql_auth
 
 - name: config | Creating Guacamole DB User
   mysql_user:
@@ -92,11 +145,21 @@
   become: true
   when: guacamole_mysql_auth
 
+- name: config | Creating Guacamole DB User
+  postgresql_user:
+    db: "{{ guacamole_postgresql_db['name'] }}"
+    name: "{{ guacamole_postgresql_db['username'] }}"
+    password: "{{ guacamole_postgresql_db['password'] }}"
+    state: present
+  become: true
+  become_user: postgres
+  when: guacamole_postgresql_auth
+
 - name: config | Checking If DB Has Been Populated
   stat:
     path: /etc/guacamole/.db_populated
   register: _guacamole_db_populated_check
-  when: guacamole_mysql_auth
+  when: guacamole_mysql_auth or guacamole_postgresql_auth
 
 - name: config | Popluating DB
   mysql_db:
@@ -118,13 +181,52 @@
     guacamole_mysql_auth and
     not _guacamole_db_populated_check['stat']['exists']
 
+- name: config | Popluating DB
+  shell: psql "{{ guacamole_postgresql_db['name'] }}" < "{{ guacamole_src_dir + '/' + 'guacamole-auth-jdbc-' + guacamole_version + '/postgresql/schema/' + item }}"
+  become: true
+  become_user: postgres
+  register: _guacamole_db_populated
+  notify:
+    - "restart {{ guacamole_tomcat_service }}"
+    - kill guacd
+    - restart guacd
+  with_items:
+    - 001-create-schema.sql
+    - 002-create-admin-user.sql
+  when: >
+    guacamole_postgresql_auth and
+    not _guacamole_db_populated_check['stat']['exists']
+
+- name: config | Setting DB permissions
+  postgresql_privs:
+    database: "{{ guacamole_postgresql_db['name'] }}"
+    schema: public
+    role: "{{ guacamole_postgresql_db['username'] }}"
+    type: table
+    obj: ALL_IN_SCHEMA
+    privs: SELECT,INSERT,UPDATE,DELETE
+  become: true
+  become_user: postgres
+
+- name: config | Setting DB permissions
+  postgresql_privs:
+    database: "{{ guacamole_postgresql_db['name'] }}"
+    schema: public
+    role: "{{ guacamole_postgresql_db['username'] }}"
+    type: sequence
+    obj: ALL_IN_SCHEMA
+    privs: all
+  become: true
+  become_user: postgres
+
 - name: config | Marking DB As Populated # noqa 503
   file:
     path: /etc/guacamole/.db_populated
     state: touch
   become: true
   when: >
-    guacamole_mysql_auth and
+    (guacamole_mysql_auth or
+     guacamole_postgresql_auth) and
     _guacamole_db_populated['changed']
 
 - name: config | Creating Tomcat symlink For guacamole.properties

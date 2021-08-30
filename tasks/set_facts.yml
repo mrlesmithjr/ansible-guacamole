@@ -23,7 +23,8 @@
     (ansible_distribution == "Debian" and
     ansible_distribution_version is version('9', '==')) or
     (ansible_distribution == "Ubuntu" and
-    ansible_distribution_version is version('18.04', '>='))
+    ansible_distribution_version is version('18.04', '>=') and
+    ansible_distribution_version is version('19.10', '<='))
 
 - name: set_facts | Setting Debian/Ubuntu Facts
   set_fact:
@@ -32,9 +33,11 @@
     guacamole_tomcat: tomcat9
     guacamole_tomcat_service: tomcat9
     guacamole_tomcat_user: tomcat
-  when:
-    - ansible_distribution == "Debian"
-    - ansible_distribution_version is version('9', '>')
+  when: >
+    (ansible_distribution == "Debian" and
+    ansible_distribution_version is version('9', '>')) or
+    (ansible_distribution == "Ubuntu" and
+    ansible_distribution_version is version('19.10', '>='))
 
 - name: set_facts | Setting RedHat Facts
   set_fact:

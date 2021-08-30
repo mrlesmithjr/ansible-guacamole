@@ -12,6 +12,13 @@ guacamole_dl_url: "{{ 'http://apache.org/dyn/closer.cgi?action=download&filename
 
 guacamole_server_hostname: localhost
 
+# Authentication OpenID
+guacamole_auth_openid_package: "{{ 'guacamole-auth-openid-' + guacamole_version + '.tar.gz' }}"
+
+guacamole_openid_auth: false
+
+guacamole_auth_openid_priority: ""
+
 # Defines if MySQL DB should be used for authentication
 guacamole_mysql_auth: false
 
@@ -21,6 +28,15 @@ guacamole_mysql_connector_dl_url: https://dev.mysql.com/get/Downloads/Connector-
 
 guacamole_mysql_connector_version: 8.0.13
 
+# Defines if PostgreSQL DB should be used for authentication
+guacamole_postgresql_auth: false
+
+guacamole_postgresql_connector_package: "{{ guacamole_postgresql_connector_dl_url + 'postgresql-' + guacamole_postgresql_connector_version + '.jar' }}"
+
+guacamole_postgresql_connector_dl_url: https://jdbc.postgresql.org/download/
+
+guacamole_postgresql_connector_version: 42.2.20
+
 # Define MySQL DB Info
 guacamole_mysql_db:
   name: guacamole
@@ -28,6 +44,26 @@ guacamole_mysql_db:
   port: 3306
   username: guacamole
   password: guacamole
+
+# Define PostgreSQL DB Info
+guacamole_postgresql_db:
+  name: guacamole
+  host: localhost
+  port: 5432
+  username: guacamole
+  password: guacamole
+  auto-create-accounts: true
+
+# Define OpenID Info
+guacamole_openid:
+  authorization-endpoint:
+  jwks-endpoint:
+  issuer:
+  client-id:
+  redirect-uri:
+  username-claim-type: preferred_username
+  groups-claim-type: groups
+  allowed-clock-skew: 500
 
 # RDP settings
 guacamole_rdp_color_depth: 24
