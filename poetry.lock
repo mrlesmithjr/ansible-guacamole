@@ -2,17 +2,17 @@
 
 [[package]]
 name = "ansible"
-version = "8.0.0"
+version = "6.6.0"
 description = "Radically simple IT automation"
 optional = false
-python-versions = ">=3.9"
+python-versions = ">=3.8"
 files = [
-    {file = "ansible-8.0.0-py3-none-any.whl", hash = "sha256:831bd24e4c312f71fe63efc3f993bea2fa04e257ddf5d1181192ea808d2fe77d"},
-    {file = "ansible-8.0.0.tar.gz", hash = "sha256:8670c7c46021c188cac235e9fde7adadbb3c380c2436a3b0c1c493c4ba10bcab"},
+    {file = "ansible-6.6.0-py3-none-any.whl", hash = "sha256:3c6812e9af1c243b8a9e5fc6cba618449813765e609caae39a757452e2818dee"},
+    {file = "ansible-6.6.0.tar.gz", hash = "sha256:e1b940a8d4f412123ede3c14b25cb99c3c8a4d535fd040aabf8e4fb7b0e4f092"},
 ]
 
 [package.dependencies]
-ansible-core = ">=2.15.0,<2.16.0"
+ansible-core = ">=2.13.6,<2.14.0"
 
 [[package]]
 name = "ansible-compat"
@@ -38,51 +38,49 @@ test = ["coverage", "pip-tools", "pytest (>=7.2.0)", "pytest-mock", "pytest-plus
 
 [[package]]
 name = "ansible-core"
-version = "2.15.1"
+version = "2.13.10"
 description = "Radically simple IT automation"
 optional = false
-python-versions = ">=3.9"
+python-versions = ">=3.8"
 files = [
-    {file = "ansible-core-2.15.1.tar.gz", hash = "sha256:ed28eb4943e480004edc9ba1e9bee979a0650cb2f9372ce4a2bd572838c60d2b"},
-    {file = "ansible_core-2.15.1-py3-none-any.whl", hash = "sha256:2926b1dc96ef69272195c91a1fedfe30b9aacd674cb04628b26626ecb0c8524a"},
+    {file = "ansible-core-2.13.10.tar.gz", hash = "sha256:d4b40a4aaf860def6c2c9e8ad5201f8683e3e7d7d8e21463c6d59ea4f8b12df7"},
+    {file = "ansible_core-2.13.10-py3-none-any.whl", hash = "sha256:dcd72152b1ce56387712d8727d75c65e61a8f6265b19105c9d0649f0777ccb67"},
 ]
 
 [package.dependencies]
 cryptography = "*"
-importlib-resources = {version = ">=5.0,<5.1", markers = "python_version < \"3.10\""}
 jinja2 = ">=3.0.0"
 packaging = "*"
 PyYAML = ">=5.1"
-resolvelib = ">=0.5.3,<1.1.0"
+resolvelib = ">=0.5.3,<0.9.0"
 
 [[package]]
 name = "ansible-lint"
-version = "6.16.2"
+version = "6.8.7"
 description = "Checks playbooks for practices and behavior that could potentially be improved"
 optional = false
-python-versions = ">=3.9"
+python-versions = ">=3.8"
 files = [
-    {file = "ansible-lint-6.16.2.tar.gz", hash = "sha256:93ad8a04adcda6025d4ff218a10694120fe70cb91da8ac9f85c5dc82b32456e4"},
-    {file = "ansible_lint-6.16.2-py3-none-any.whl", hash = "sha256:086306d5962639100d03701fce589c85549fe1c23e359abc52c91e07f0108e5b"},
+    {file = "ansible-lint-6.8.7.tar.gz", hash = "sha256:de3de4e57cd54e17c1ec3a0b4a21d4811838e77d67b56cbe8f91107f2a434432"},
+    {file = "ansible_lint-6.8.7-py3-none-any.whl", hash = "sha256:1824afce2a5619b47c19f6377a0d85b4f39e80b1fc1857191d6a908d68396bf9"},
 ]
 
 [package.dependencies]
-ansible-core = ">=2.12.0"
-black = ">=22.8.0"
-filelock = ">=3.3.0"
-jsonschema = ">=4.10.0"
-packaging = ">=21.3"
+ansible-compat = ">=2.2.5"
+ansible-core = {version = ">=2.12.0", markers = "python_version >= \"3.9\""}
+black = ">=22.1.0"
+filelock = "*"
+jsonschema = ">=4.17.0"
+packaging = "*"
 pyyaml = ">=5.4.1"
-rich = ">=12.0.0"
-"ruamel.yaml" = ">=0.17.0,<0.18"
-subprocess-tee = ">=0.4.1"
-wcmatch = ">=8.1.2"
-yamllint = ">=1.30.0"
+rich = ">=12.6.0"
+"ruamel.yaml" = ">=0.17.21,<0.18"
+wcmatch = ">=8.4.1"
+yamllint = ">=1.28.0"
 
 [package.extras]
-docs = ["mkdocs-ansible[lock] (>=0.1.4)", "pipdeptree (>=2.4.0)"]
-lock = ["ansible-core (==2.15.0)", "attrs (==23.1.0)", "black (==23.3.0)", "bracex (==2.3.post1)", "cffi (==1.15.1)", "click (==8.1.3)", "cryptography (==40.0.2)", "filelock (==3.12.0)", "importlib-resources (==5.0.7)", "jinja2 (==3.1.2)", "jsonschema (==4.17.3)", "markdown-it-py (==2.2.0)", "markupsafe (==2.1.2)", "mdurl (==0.1.2)", "mypy-extensions (==1.0.0)", "packaging (==23.1)", "pathspec (==0.11.1)", "platformdirs (==3.5.1)", "pycparser (==2.21)", "pygments (==2.15.1)", "pyrsistent (==0.19.3)", "pyyaml (==6.0)", "rich (==13.3.5)", "ruamel-yaml (==0.17.26)", "subprocess-tee (==0.4.1)", "tomli (==2.0.1)", "typing-extensions (==4.5.0)", "wcmatch (==8.4.1)", "yamllint (==1.31.0)"]
-test = ["black", "coverage-enable-subprocess", "coverage[toml] (>=6.4.4)", "jmespath", "mypy", "netaddr", "psutil", "pylint", "pytest (>=7.2.2)", "pytest-mock", "pytest-plus (>=0.2)", "pytest-xdist (>=2.1.0)", "ruamel-yaml-clib", "ruamel.yaml (>=0.17.26,<0.18)", "spdx-tools (>=0.7.1)", "types-jsonschema", "types-pyyaml"]
+docs = ["myst-parser (>=0.16.1)", "pipdeptree (>=2.2.1)", "sphinx (>=4.4.0)", "sphinx-ansible-theme (>=0.9.1)", "sphinx-rtd-theme (>=1.0.0,<2.0.0)", "sphinxcontrib-apidoc (>=0.3.0)", "sphinxcontrib-programoutput2 (>=2.0a1)"]
+test = ["black", "coverage-enable-subprocess", "coverage[toml] (>=6.4.4)", "flake8", "flake8-future-annotations", "flaky (>=3.7.0)", "mypy", "psutil", "pylint", "pytest (>=7.2.0)", "pytest-mock", "pytest-plus (>=0.2)", "pytest-xdist (>=2.1.0)"]
 
 [[package]]
 name = "arrow"
@@ -517,6 +515,38 @@ files = [
 ]
 
 [[package]]
+name = "distro"
+version = "1.8.0"
+description = "Distro - an OS platform information API"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "distro-1.8.0-py3-none-any.whl", hash = "sha256:99522ca3e365cac527b44bde033f64c6945d90eb9f769703caaec52b09bbd3ff"},
+    {file = "distro-1.8.0.tar.gz", hash = "sha256:02e111d1dc6a50abb8eed6bf31c3e48ed8b0830d1ea2a1b78c61765c2513fdd8"},
+]
+
+[[package]]
+name = "docker"
+version = "6.1.3"
+description = "A Python library for the Docker Engine API."
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "docker-6.1.3-py3-none-any.whl", hash = "sha256:aecd2277b8bf8e506e484f6ab7aec39abe0038e29fa4a6d3ba86c3fe01844ed9"},
+    {file = "docker-6.1.3.tar.gz", hash = "sha256:aa6d17830045ba5ef0168d5eaa34d37beeb113948c413affe1d5991fc11f9a20"},
+]
+
+[package.dependencies]
+packaging = ">=14.0"
+pywin32 = {version = ">=304", markers = "sys_platform == \"win32\""}
+requests = ">=2.26.0"
+urllib3 = ">=1.26.0"
+websocket-client = ">=0.32.0"
+
+[package.extras]
+ssh = ["paramiko (>=2.4.3)"]
+
+[[package]]
 name = "enrich"
 version = "1.2.7"
 description = "enrich"
@@ -588,21 +618,6 @@ files = [
     {file = "idna-3.4-py3-none-any.whl", hash = "sha256:90b77e79eaa3eba6de819a0c442c0b4ceefc341a7a2ab77d7562bf49f425c5c2"},
     {file = "idna-3.4.tar.gz", hash = "sha256:814f528e8dead7d329833b91c5faa87d60bf71824cd12a7530b5526063d02cb4"},
 ]
-
-[[package]]
-name = "importlib-resources"
-version = "5.0.7"
-description = "Read resources from Python packages"
-optional = false
-python-versions = ">=3.6"
-files = [
-    {file = "importlib_resources-5.0.7-py3-none-any.whl", hash = "sha256:2238159eb743bd85304a16e0536048b3e991c531d1cd51c4a834d1ccf2829057"},
-    {file = "importlib_resources-5.0.7.tar.gz", hash = "sha256:4df460394562b4581bb4e4087ad9447bd433148fba44241754ec3152499f1d1b"},
-]
-
-[package.extras]
-docs = ["jaraco.packaging (>=8.2)", "rst.linker (>=1.9)", "sphinx"]
-testing = ["pytest (>=3.5,!=3.7.3)", "pytest-black (>=0.3.7)", "pytest-checkdocs (>=1.2.3)", "pytest-cov", "pytest-enabler", "pytest-flake8", "pytest-mypy"]
 
 [[package]]
 name = "isort"
@@ -824,54 +839,58 @@ files = [
 
 [[package]]
 name = "molecule"
-version = "5.0.1"
+version = "4.0.4"
 description = "Molecule aids in the development and testing of Ansible roles"
 optional = false
-python-versions = ">=3.9"
+python-versions = ">=3.8"
 files = [
-    {file = "molecule-5.0.1-py3-none-any.whl", hash = "sha256:d02384a95188120ddfb4beb15ee0d9ea8b261825e37b36ef7d3fbdd63bd15806"},
-    {file = "molecule-5.0.1.tar.gz", hash = "sha256:15a4c89e82ec1319bb1b36430061a103b91f1eb6d000b54330a161f4c8ee62d7"},
+    {file = "molecule-4.0.4-py3-none-any.whl", hash = "sha256:437a0829c3273f542e0db09516ae743607e6a2eda4d8cbdfb407edda3e0facb2"},
+    {file = "molecule-4.0.4.tar.gz", hash = "sha256:aab00c1ba62a42d77edd1a51528dfbb46abca70df7c7147fda0925ee4fe7deda"},
 ]
 
 [package.dependencies]
-ansible-compat = ">=2.2.0,<4.0.0"
-ansible-core = ">=2.12.10"
+ansible-compat = ">=2.2.0"
 click = ">=8.0,<9"
 click-help-colors = ">=0.9"
 cookiecutter = ">=1.7.3"
 enrich = ">=1.2.7"
 Jinja2 = ">=2.11.3"
 jsonschema = ">=4.9.1"
+molecule-docker = {version = ">=1.0.0", optional = true, markers = "extra == \"docker\""}
 packaging = "*"
 pluggy = ">=0.7.1,<2.0"
 PyYAML = ">=5.1"
 rich = ">=9.5.1"
 
 [package.extras]
-docs = ["mkdocs-ansible[lock] (>=0.1.4)", "pipdeptree (>=2.4.0)"]
-lock = ["ansible-compat (==3.0.2)", "ansible-core (==2.14.4)", "arrow (==1.2.3)", "attrs (==23.1.0)", "binaryornot (==0.4.4)", "certifi (==2022.12.7)", "cffi (==1.15.1)", "chardet (==5.1.0)", "charset-normalizer (==3.1.0)", "click (==8.1.3)", "click-help-colors (==0.9.1)", "cookiecutter (==2.1.1)", "cryptography (==40.0.2)", "enrich (==1.2.7)", "idna (==3.4)", "jinja2 (==3.1.2)", "jinja2-time (==0.2.0)", "jsonschema (==4.17.3)", "markdown-it-py (==2.2.0)", "markupsafe (==2.1.2)", "mdurl (==0.1.2)", "packaging (==23.1)", "pluggy (==1.0.0)", "pycparser (==2.21)", "pygments (==2.15.1)", "pyrsistent (==0.19.3)", "python-dateutil (==2.8.2)", "python-slugify (==8.0.1)", "pyyaml (==6.0)", "requests (==2.28.2)", "resolvelib (==0.8.1)", "rich (==13.3.4)", "six (==1.16.0)", "subprocess-tee (==0.4.1)", "text-unidecode (==1.3)", "urllib3 (==1.26.15)"]
-test = ["ansi2html (>=1.8.0)", "ansible-lint (>=6.12.1)", "check-jsonschema", "coverage (>=7.0.3)", "filelock (>=3.9.0)", "pexpect (>=4.8.0,<5)", "pytest (>=7.2.0)", "pytest-mock (>=3.10.0)", "pytest-plus (>=0.4.0)", "pytest-testinfra (>=7.0.0)", "pytest-xdist (>=3.1.0)"]
+docker = ["molecule-docker (>=1.0.0)"]
+docs = ["Sphinx (>=5.0.0,<6.0.0)", "ansible-core (>=2.12.0)", "jinja2 (<3.2.0)", "simplejson (>=3.17.2)", "sphinx-ansible-theme (>=0.8.0,<0.10.0)", "sphinx-notfound-page (>=0.7.1)"]
+lint = ["check-jsonschema (>=0.18.3)", "flake8 (>=3.8.4)", "jsonschema (>=4.16.0)", "pre-commit (>=2.10.1)", "yamllint"]
+podman = ["molecule-podman (>=1.0.1)"]
+test = ["ansi2html (>=1.6.0)", "coverage (>=6.2)", "filelock", "pexpect (>=4.8.0,<5)", "pytest (>=6.1.2)", "pytest-cov (>=2.10.1)", "pytest-html (>=3.0.0)", "pytest-mock (>=3.3.1)", "pytest-plus (>=0.2)", "pytest-testinfra (>=6.1.0)", "pytest-xdist (>=2.1.0)"]
+windows = ["pywinrm"]
 
 [[package]]
-name = "molecule-plugins"
-version = "23.4.1"
-description = "Molecule Plugins"
+name = "molecule-docker"
+version = "2.1.0"
+description = "Molecule aids in the development and testing of Ansible roles"
 optional = false
-python-versions = ">=3.9"
+python-versions = ">=3.8"
 files = [
-    {file = "molecule-plugins-23.4.1.tar.gz", hash = "sha256:34c47ee2c11c35ba30ca84ea684c1ee1669cf7e58d2197ac9dbfcbf42d0a1b7b"},
-    {file = "molecule_plugins-23.4.1-py3-none-any.whl", hash = "sha256:6734e11fa36b1ee3f1f80feaaa4eb703eae17f9117abe53dc5af6f3f093c0a63"},
+    {file = "molecule-docker-2.1.0.tar.gz", hash = "sha256:195b97673cbc2335cfa6810816de5cbf807507bf350a9d16ca98b224b1647145"},
+    {file = "molecule_docker-2.1.0-py3-none-any.whl", hash = "sha256:d439b075789be700b6594ed73f3254e2a25ed61dcf312d80ab6e718d13bf150e"},
 ]
 
 [package.dependencies]
-molecule = ">=5.0"
-python-vagrant = {version = "*", optional = true, markers = "extra == \"vagrant\""}
+docker = ">=4.3.1"
+molecule = ">=4.0.0"
+requests = "*"
+selinux = {version = "*", markers = "sys_platform == \"linux\" or sys_platform == \"linux2\""}
 
 [package.extras]
-docker = ["docker (>=4.3.1)", "requests", "selinux", "selinux"]
-selinux = ["selinux", "selinux"]
-test = ["molecule[test]", "pytest-helpers-namespace (>=2019.1.8)"]
-vagrant = ["python-vagrant"]
+docs = ["Sphinx", "simplejson", "sphinx-ansible-theme (>=0.2.2)"]
+lint = ["pre-commit (>=1.21.0)"]
+test = ["molecule[test]"]
 
 [[package]]
 name = "mypy-extensions"
@@ -1112,18 +1131,27 @@ text-unidecode = ">=1.3"
 unidecode = ["Unidecode (>=1.1.1)"]
 
 [[package]]
-name = "python-vagrant"
-version = "1.0.0"
-description = "Python bindings for interacting with Vagrant virtual machines."
+name = "pywin32"
+version = "306"
+description = "Python for Window Extensions"
 optional = false
-python-versions = ">=3.8"
+python-versions = "*"
 files = [
-    {file = "python-vagrant-1.0.0.tar.gz", hash = "sha256:a8fe93ccf2ff37ecc95ec2f49ea74a91a6ce73a4db4a16a98dd26d397cfd09e5"},
-    {file = "python_vagrant-1.0.0-py3-none-any.whl", hash = "sha256:9f24a29e3f7b17d79c399d0f358d9cc1b76fd5495698c438a39cdae89de467f0"},
+    {file = "pywin32-306-cp310-cp310-win32.whl", hash = "sha256:06d3420a5155ba65f0b72f2699b5bacf3109f36acbe8923765c22938a69dfc8d"},
+    {file = "pywin32-306-cp310-cp310-win_amd64.whl", hash = "sha256:84f4471dbca1887ea3803d8848a1616429ac94a4a8d05f4bc9c5dcfd42ca99c8"},
+    {file = "pywin32-306-cp311-cp311-win32.whl", hash = "sha256:e65028133d15b64d2ed8f06dd9fbc268352478d4f9289e69c190ecd6818b6407"},
+    {file = "pywin32-306-cp311-cp311-win_amd64.whl", hash = "sha256:a7639f51c184c0272e93f244eb24dafca9b1855707d94c192d4a0b4c01e1100e"},
+    {file = "pywin32-306-cp311-cp311-win_arm64.whl", hash = "sha256:70dba0c913d19f942a2db25217d9a1b726c278f483a919f1abfed79c9cf64d3a"},
+    {file = "pywin32-306-cp312-cp312-win32.whl", hash = "sha256:383229d515657f4e3ed1343da8be101000562bf514591ff383ae940cad65458b"},
+    {file = "pywin32-306-cp312-cp312-win_amd64.whl", hash = "sha256:37257794c1ad39ee9be652da0462dc2e394c8159dfd913a8a4e8eb6fd346da0e"},
+    {file = "pywin32-306-cp312-cp312-win_arm64.whl", hash = "sha256:5821ec52f6d321aa59e2db7e0a35b997de60c201943557d108af9d4ae1ec7040"},
+    {file = "pywin32-306-cp37-cp37m-win32.whl", hash = "sha256:1c73ea9a0d2283d889001998059f5eaaba3b6238f767c9cf2833b13e6a685f65"},
+    {file = "pywin32-306-cp37-cp37m-win_amd64.whl", hash = "sha256:72c5f621542d7bdd4fdb716227be0dd3f8565c11b280be6315b06ace35487d36"},
+    {file = "pywin32-306-cp38-cp38-win32.whl", hash = "sha256:e4c092e2589b5cf0d365849e73e02c391c1349958c5ac3e9d5ccb9a28e017b3a"},
+    {file = "pywin32-306-cp38-cp38-win_amd64.whl", hash = "sha256:e8ac1ae3601bee6ca9f7cb4b5363bf1c0badb935ef243c4733ff9a393b1690c0"},
+    {file = "pywin32-306-cp39-cp39-win32.whl", hash = "sha256:e25fd5b485b55ac9c057f67d94bc203f3f6595078d1fb3b458c9c28b7153a802"},
+    {file = "pywin32-306-cp39-cp39-win_amd64.whl", hash = "sha256:39b61c15272833b5c329a2989999dcae836b1eed650252ab1b7bfbe1d59f30f4"},
 ]
-
-[package.extras]
-test = ["coverage (>=6.3)", "pytest (>=7.0.0)", "pytest-cov (>=3.0.0)"]
 
 [[package]]
 name = "pyyaml"
@@ -1197,13 +1225,13 @@ use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
 name = "resolvelib"
-version = "1.0.1"
+version = "0.8.1"
 description = "Resolve abstract dependencies into concrete ones"
 optional = false
 python-versions = "*"
 files = [
-    {file = "resolvelib-1.0.1-py2.py3-none-any.whl", hash = "sha256:d2da45d1a8dfee81bdd591647783e340ef3bcb104b54c383f70d422ef5cc7dbf"},
-    {file = "resolvelib-1.0.1.tar.gz", hash = "sha256:04ce76cbd63fded2078ce224785da6ecd42b9564b1390793f64ddecbe997b309"},
+    {file = "resolvelib-0.8.1-py2.py3-none-any.whl", hash = "sha256:d9b7907f055c3b3a2cfc56c914ffd940122915826ff5fb5b1de0c99778f4de98"},
+    {file = "resolvelib-0.8.1.tar.gz", hash = "sha256:c6ea56732e9fb6fca1b2acc2ccc68a0b6b8c566d8f3e78e0443310ede61dbd37"},
 ]
 
 [package.extras]
@@ -1293,6 +1321,20 @@ files = [
     {file = "ruamel.yaml.clib-0.2.7-cp39-cp39-win_amd64.whl", hash = "sha256:184faeaec61dbaa3cace407cffc5819f7b977e75360e8d5ca19461cd851a5fc5"},
     {file = "ruamel.yaml.clib-0.2.7.tar.gz", hash = "sha256:1f08fd5a2bea9c4180db71678e850b995d2a5f4537be0e94557668cf0f5f9497"},
 ]
+
+[[package]]
+name = "selinux"
+version = "0.3.0"
+description = "shim selinux module"
+optional = false
+python-versions = ">=3.9"
+files = [
+    {file = "selinux-0.3.0-py2.py3-none-any.whl", hash = "sha256:ecf7add45c939e9dda682c390a2cd0a845c94a4793a2cce9e8870d4ee9501f99"},
+    {file = "selinux-0.3.0.tar.gz", hash = "sha256:2a88b337ac46ad0f06f557b2806c3df62421972f766673dd8bf26732fb75a9ea"},
+]
+
+[package.dependencies]
+distro = ">=1.3.0"
 
 [[package]]
 name = "setuptools"
@@ -1431,6 +1473,22 @@ files = [
 bracex = ">=2.1.1"
 
 [[package]]
+name = "websocket-client"
+version = "1.6.0"
+description = "WebSocket client for Python with low level API options"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "websocket-client-1.6.0.tar.gz", hash = "sha256:e84c7eafc66aade6d1967a51dfd219aabdf81d15b9705196e11fd81f48666b78"},
+    {file = "websocket_client-1.6.0-py3-none-any.whl", hash = "sha256:72d7802608745b0a212f79b478642473bd825777d8637b6c8c421bf167790d4f"},
+]
+
+[package.extras]
+docs = ["Sphinx (>=3.4)", "sphinx-rtd-theme (>=0.5)"]
+optional = ["python-socks", "wsaccel"]
+test = ["websockets"]
+
+[[package]]
 name = "wrapt"
 version = "1.15.0"
 description = "Module for decorators, wrappers and monkey patching."
@@ -1535,4 +1593,4 @@ dev = ["doc8", "flake8", "flake8-import-order", "rstcheck[sphinx]", "sphinx"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<4.0"
-content-hash = "ba9c6c8f9c5f1be793cc4cb636cfe497a7c486f0f4ec5ff64013cf82857b75a6"
+content-hash = "0cc05d74853ca5e06fa0cc391f1cd44146bec3b276d3894a5fa2ad887537f134"
