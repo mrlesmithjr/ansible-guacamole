@@ -11,8 +11,8 @@ lint: |
   ansible-lint
   flake8
 platforms:
-  - name: ubuntu1804
-    image: mrlesmithjr/ubuntu:18.04
+  - name: debian11
+    image: mrlesmithjr/debian:11
     privileged: true
     command: /lib/systemd/systemd
     # tmpfs:
