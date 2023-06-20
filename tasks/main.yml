@@ -1,17 +1,24 @@
 ---
 # tasks file for ansible-guacamole
-- include_tasks: set_facts.yml
+- name: Set facts
+  ansible.builtin.include_tasks: set_facts.yml
 
-- include_tasks: debian.yml
+- name: Debian specific tasks
+  ansible.builtin.include_tasks: debian.yml
   when: ansible_os_family == "Debian"
 
-- include_tasks: redhat.yml
+- name: RHEL specific tasks
+  ansible.builtin.include_tasks: redhat.yml
   when: ansible_os_family == "RedHat"
 
-- include_tasks: install.yml
+- name: Install Guacamole
+  ansible.builtin.include_tasks: install.yml
 
-- include_tasks: config.yml
+- name: Configure Guacamole
+  ansible.builtin.include_tasks: config.yml
 
-- include_tasks: services.yml
+- name: Manage Guacamole services
+  ansible.builtin.include_tasks: services.yml
 
-- include_tasks: client.yml
+- name: Manage Guacamole client configurations
+  ansible.builtin.include_tasks: client.yml

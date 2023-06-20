@@ -5,22 +5,19 @@ description = ""
 authors = ["Larry Smith Jr. <mrlesmithjr@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.7"
-ansible = "^3.1.0"
-ansible-lint = "^5.0.6"
-docker = "^4.4.4"
-mkdocs = "^1.1.2"
-molecule = {extras = ["docker"], version = "^3.3.0"}
-pip-tools = "^6.0.1"
-yamllint = "^1.26.0"
+python = ">=3.9,<4.0"
+ansible = "6.6.0"
+chardet = "^5.1.0"
+ansible-compat = "3.0.2"
 
-[tool.poetry.dev-dependencies]
-autopep8 = "^1.5.6"
-flake8 = "^3.9.0"
-pycodestyle = "^2.7.0"
-pylint = "^2.7.3"
-tox = "^3.23.0"
-robotframework = "^4.0"
+[tool.poetry.group.dev.dependencies]
+ansible-lint = "6.8.7"
+black = "^22.10.0"
+pylint = "^2.15.7"
+molecule = {extras = ["docker"], version = "^4.0.3"}
+flake8 = "^6.0.0"
+cookiecutter = "^2.1.1"
+pre-commit = "^2.20.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
