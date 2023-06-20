@@ -207,6 +207,7 @@
     privs: SELECT,INSERT,UPDATE,DELETE
   become: true
   become_user: postgres
+  when: guacamole_postgresql_auth
 
 - name: config | Setting DB permissions
   postgresql_privs:
@@ -218,6 +219,7 @@
     privs: all
   become: true
   become_user: postgres
+  when: guacamole_postgresql_auth
 
 - name: config | Marking DB As Populated # noqa 503
   file:
