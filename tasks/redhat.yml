@@ -1,6 +1,6 @@
 ---
 - name: redhat | Enabling EPEL Repo
-  yum:
+  ansible.builtin.yum:
     name: ["epel-release"]
     state: present
   become: true
@@ -9,7 +9,7 @@
   when: ansible_distribution != "Fedora"
 
 - name: redhat | Enabling RPM Fusion Repos
-  yum:
+  ansible.builtin.yum:
     name: "{{ guacamole_redhat_fusion_repos }}"
     state: present
   become: true
@@ -18,7 +18,7 @@
   when: ansible_distribution != "Fedora"
 
 - name: redhat | Installing Guacamole Pre-Reqs
-  yum:
+  ansible.builtin.yum:
     name: "{{ guacamole_redhat_pre_reqs }}"
     state: present
   become: true
@@ -27,7 +27,7 @@
   when: ansible_distribution != "Fedora"
 
 - name: redhat | Installing Guacamole Pre-Reqs
-  dnf:
+  ansible.builtin.dnf:
     name: "{{ guacamole_redhat_pre_reqs }}"
     state: present
   become: true

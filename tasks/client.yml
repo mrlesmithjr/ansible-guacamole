@@ -1,6 +1,6 @@
 ---
-- name: client | Downloading Guacamole Client Package
-  get_url:
+- name: client | Downloading Guacamole Client Package # noqa risky-file-permissions
+  ansible.builtin.get_url:
     url: "{{ guacamole_dl_url + '/binary/' + guacamole_client_package }}"
     dest: /etc/guacamole/guacamole.war
   become: true
@@ -8,7 +8,7 @@
   until: dl is success
 
 - name: client | Creating Tomcat Symlink For {{ 'guacamole-' + guacamole_version + '.war' }}
-  file:
+  ansible.builtin.file:
     src: /etc/guacamole/guacamole.war
     dest: "{{ '/var/lib/' + guacamole_tomcat + '/webapps/guacamole.war' }}"
     state: link
@@ -20,7 +20,7 @@
 
 # Moving here to ensure idempotency as it was failing when included above
 - name: client | Setting Permissions On Tomcat Symlink For {{ 'guacamole-' + guacamole_version + '.war' }}
-  file:
+  ansible.builtin.file:
     path: /etc/guacamole/guacamole.war
     owner: "{{ guacamole_tomcat_user }}"
     group: "{{ guacamole_tomcat_user }}"

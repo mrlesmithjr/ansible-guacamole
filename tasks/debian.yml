@@ -1,6 +1,6 @@
 ---
 - name: debian | Installing Guacamole Pre-Reqs
-  apt:
+  ansible.builtin.apt:
     name: "{{ guacamole_debian_pre_reqs }}"
     state: present
   become: true

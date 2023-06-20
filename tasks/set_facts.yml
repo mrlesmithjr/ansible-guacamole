@@ -1,6 +1,6 @@
 ---
 - name: set_facts | Setting Debian/Ubuntu Facts
-  set_fact:
+  ansible.builtin.set_fact:
     guacamole_freerdp: freerdp-x11
     guacamole_freerdp_dev: libfreerdp-dev
     guacamole_tomcat: tomcat7
@@ -13,7 +13,7 @@
     ansible_distribution_version is version('18.04', '<'))
 
 - name: set_facts | Setting Debian/Ubuntu Facts
-  set_fact:
+  ansible.builtin.set_fact:
     guacamole_freerdp: freerdp-x11
     guacamole_freerdp_dev: freerdp2-dev
     guacamole_tomcat: tomcat8
@@ -27,7 +27,7 @@
     ansible_distribution_version is version('19.10', '<='))
 
 - name: set_facts | Setting Debian/Ubuntu Facts
-  set_fact:
+  ansible.builtin.set_fact:
     guacamole_freerdp: freerdp2-x11
     guacamole_freerdp_dev: freerdp2-dev
     guacamole_tomcat: tomcat9
@@ -40,7 +40,7 @@
     ansible_distribution_version is version('19.10', '>='))
 
 - name: set_facts | Setting RedHat Facts
-  set_fact:
+  ansible.builtin.set_fact:
     guacamole_tomcat: tomcat
     guacamole_tomcat_service: tomcat
     guacamole_tomcat_user: tomcat
@@ -48,7 +48,7 @@
     - ansible_os_family == "RedHat"
 
 - name: set_facts | Setting Debian Packages
-  set_fact:
+  ansible.builtin.set_fact:
     guacamole_debian_pre_reqs:
       - "{{ guacamole_tomcat }}"
       - build-essential
@@ -74,7 +74,7 @@
     - ansible_distribution_version is version('9', '<')
 
 - name: set_facts | Setting Debian Packages
-  set_fact:
+  ansible.builtin.set_fact:
     guacamole_debian_pre_reqs:
       - "{{ guacamole_tomcat }}"
       - build-essential
@@ -100,7 +100,7 @@
     - ansible_distribution_version is version('9', '>=')
 
 - name: set_facts | Setting Ubuntu Packages
-  set_fact:
+  ansible.builtin.set_fact:
     guacamole_debian_pre_reqs:
       - "{{ guacamole_tomcat }}"
       - build-essential
@@ -128,7 +128,7 @@
     - ansible_distribution_version is version('18.04', '<')
 
 - name: set_facts | Setting Ubuntu Packages
-  set_fact:
+  ansible.builtin.set_fact:
     guacamole_debian_pre_reqs:
       - "{{ guacamole_tomcat }}"
       - build-essential
@@ -154,7 +154,7 @@
     - ansible_distribution_version is version('18.04', '>=')
 
 - name: set_facts | Setting RedHat Packages
-  set_fact:
+  ansible.builtin.set_fact:
     guacamole_redhat_pre_reqs:
       - "{{ guacamole_tomcat }}"
       - cairo-devel
