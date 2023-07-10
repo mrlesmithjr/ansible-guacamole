@@ -22,11 +22,11 @@ guacamole_auth_openid_priority: ""
 # Defines if MySQL DB should be used for authentication
 guacamole_mysql_auth: false
 
-guacamole_mysql_connector_package: "{{ guacamole_mysql_connector_dl_url + 'mysql-connector-java-' + guacamole_mysql_connector_version + '.tar.gz' }}"
+guacamole_mysql_connector_package: "{{ guacamole_mysql_connector_dl_url + 'mysql-connector-j-' + guacamole_mysql_connector_version + '.tar.gz' }}"
 
-guacamole_mysql_connector_dl_url: https://dev.mysql.com/get/Downloads/Connector-J/
+guacamole_mysql_connector_dl_url: https://cdn.mysql.com//Downloads/Connector-J/
 
-guacamole_mysql_connector_version: 8.0.13
+guacamole_mysql_connector_version: 8.0.33
 
 # Defines if PostgreSQL DB should be used for authentication
 guacamole_postgresql_auth: false
