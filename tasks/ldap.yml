@@ -1,12 +1,12 @@
 ---
 # Documentation : https://guacamole.apache.org/doc/gug/ldap-auth.html#how-guacamole-uses-ldap
 
- - name: config | Downloading Auth LDAP Library
-   ansible.builtin.unarchive:
-     src: "{{ guacamole_dl_url + '/binary/' + guacamole_auth_ldap_package }}"
-     dest: "{{ guacamole_src_dir }}"
-     remote_src: true
-   become: true
+- name: config | Downloading Auth LDAP Library
+  ansible.builtin.unarchive:
+    src: "{{ guacamole_dl_url + '/binary/' + guacamole_auth_ldap_package }}"
+    dest: "{{ guacamole_src_dir }}"
+    remote_src: true
+  become: true
 
 - name: config | Copying Auth LDAP Connector  # noqa risky-file-permissions
   ansible.builtin.copy:
