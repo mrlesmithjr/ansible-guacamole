@@ -37,7 +37,7 @@
     - "restart {{ guacamole_tomcat_service }}"
     - kill guacd
     - restart guacd
-  when: guacamole_users is defined
+  when: guacamole_users is defined and guacamole_users | list | length >= 1
 
 - name: config | Downloading Auth JDBC Library
   ansible.builtin.unarchive:
