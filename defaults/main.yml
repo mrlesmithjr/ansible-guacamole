@@ -81,7 +81,7 @@ guacamole_server_package: "{{ 'guacamole-server-' + guacamole_version + '.tar.gz
 
 guacamole_server_port: 4822
 
-#guacamole_basic_user_mapping: /etc/guacamole/user-mapping.xml
+guacamole_basic_user_mapping: /etc/guacamole/user-mapping.xml
 
 guacamole_src_dir: /usr/local/src
 
