@@ -1,0 +1,62 @@
+{{ ansible_managed | comment }}
+{% for ldap in guacamole_ldap.servers %}
+- hostname: {{ ldap.name }}
+{% if ldap['port'] is defined %}
+  port: {{ ldap['port'] }}
+{% endif %}
+{% if ldap['encryption_method'] is defined %}
+  encryption-method: {{ ldap['encryption_method'] }}
+{% endif %}
+{% if ldap['max_search_results'] is defined %}
+  max-search-results: {{ ldap['max_search_results'] }}
+{% endif %}
+{% if ldap['search_bind_dn'] is defined %}
+  search-bind-dn: {{ ldap['search_bind_dn'] }}
+{% endif %}
+{% if ldap['search_bind_password'] is defined %}
+  search-bind-password: {{ ldap['search_bind_password'] }}
+{% endif %}
+{% if ldap['user_base_dn'] is defined %}
+  user-base-dn: {{ ldap['user_base_dn'] }}
+{% endif %}
+{% if ldap['username_attribute'] is defined %}
+  username-attribute: {{ ldap['username_attribute'] }}
+{% endif %}
+{% if ldap['member_attribute'] is defined %}
+  member-attribute: {{ ldap['member_attribute'] }}
+{% endif %}
+{% if ldap['member_attribute_type'] is defined %}
+  member-attribute-type: {{ ldap['member_attribute_type'] }}
+{% endif %}
+{% if ldap['member_attribute_type'] is defined %}
+{# https://guacamole.apache.org/doc/gug/configuring-guacamole.html#parameter-tokens #}
+  user-attributes: {{ ldap['member_attribute_type'] }}
+{% endif %}
+{% if ldap['search_filter'] is defined %}
+  user-search-filter: {{ ldap['search_filter'] }}
+{% endif %}
+{% if ldap['config_base_dn'] is defined %}
+  config-base-dn: {{ ldap['config_base_dn'] }}
+{% endif %}
+{% if ldap['group_base_dn'] is defined %}
+  group-base-dn: {{ ldap['group_base_dn'] }}
+{% endif %}
+{% if ldap['group_name_attribute'] is defined %}
+  group-name-attribute: {{ ldap['group_name_attribute'] }}
+{% endif %}
+{% if ldap['group_search_filter'] is defined %}
+  group-search-filter: {{ ldap['group_search_filter'] }}
+{% endif %}
+{% if ldap['dereference_aliases'] is defined %}
+  dereference-aliases: {{ ldap['dereference_aliases'] }}
+{% endif %}
+{% if ldap['follow_referrals'] is defined %}
+  follow-referrals: {{ ldap['follow_referrals'] }}
+{% endif %}
+{% if ldap['max_referral_hops'] is defined %}
+  max-referral-hops: {{ ldap['max_referral_hops'] }}
+{% endif %}
+{% if ldap['operation_timeout'] is defined %}
+  operation-timeout: {{ ldap['operation_timeout'] }}
+{% endif %}
+{% endfor %}

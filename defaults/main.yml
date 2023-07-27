@@ -12,6 +12,9 @@ guacamole_dl_url: "{{ 'http://apache.org/dyn/closer.cgi?action=download&filename
 
 guacamole_server_hostname: localhost
 
+# Authentication LDAP
+guacamole_auth_ldap_package: "{{ 'guacamole-auth-ldap-' + guacamole_version + '.tar.gz' }}"
+
 # Authentication TOPT
 guacamole_auth_totp_package: "{{ 'guacamole-auth-totp-' + guacamole_version + '.tar.gz' }}"
 

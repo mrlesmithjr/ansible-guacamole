@@ -1,0 +1,29 @@
+---
+# Documentation : https://guacamole.apache.org/doc/gug/ldap-auth.html#how-guacamole-uses-ldap
+
+- name: config | Downloading Auth LDAP Library
+  ansible.builtin.unarchive:
+    src: "{{ guacamole_dl_url + '/binary/' + guacamole_auth_ldap_package }}"
+    dest: "{{ guacamole_src_dir }}"
+    remote_src: true
+  become: true
+
+- name: config | Copying Auth LDAP Connector  # noqa risky-file-permissions
+  ansible.builtin.copy:
+    src: "{{ guacamole_src_dir + '/' + 'guacamole-auth-ldap-' + guacamole_version + '/' + 'guacamole-auth-ldap-' + guacamole_version + '.jar' }}"
+    dest: /etc/guacamole/extensions/
+    owner: "{{ guacamole_tomcat_user }}"
+    group: "{{ guacamole_tomcat_user }}"
+    remote_src: true
+  become: true
+
+- name: config | Configuring ldap-servers.yml
+  ansible.builtin.template:
+    src: etc/guacamole/ldap-servers.yml.j2
+    dest: /etc/guacamole/ldap-servers.yml
+    owner: "{{ guacamole_tomcat_user }}"
+    group: "{{ guacamole_tomcat_user }}"
+    mode: u=rw,g=r,o=r
+  become: true
+  notify:
+    - "restart {{ guacamole_tomcat_service }}"
