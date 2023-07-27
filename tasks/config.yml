@@ -90,7 +90,7 @@
 
 - name: config | Copying MySQL Connector # noqa risky-file-permissions
   ansible.builtin.copy:
-    src: "{{ guacamole_src_dir + '/' + 'mysql-connector-java-' + guacamole_mysql_connector_version + '/' + 'mysql-connector-java-' + guacamole_mysql_connector_version + '.jar' }}"
+    src: "{{ guacamole_src_dir + '/' + 'mysql-connector-j-' + guacamole_mysql_connector_version + '/' + 'mysql-connector-j-' + guacamole_mysql_connector_version + '.jar' }}"
     dest: /etc/guacamole/lib/
     owner: "{{ guacamole_tomcat_user }}"
     group: "{{ guacamole_tomcat_user }}"
