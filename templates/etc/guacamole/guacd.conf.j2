@@ -1,0 +1,29 @@
+{% if guacd_config.daemon is defined %}
+[daemon]
+{% if guacd_config.daemon.pid_file is defined %}
+pid_file = {{ guacd_config.daemon.pid_file }}
+{% endif %}
+{% if guacd_config.daemon.log_level is defined %}
+log_level = {{ guacd_config.daemon.log_level }}
+{% endif %}
+{% endif %}
+
+{% if guacd_config.server is defined %}
+[server]
+{% if guacd_config.server.bind_host is defined %}
+bind_host = {{ guacd_config.server.bind_host }}
+{% endif %}
+{% if guacd_config.server.bind_port is defined %}
+bind_port = {{ guacd_config.server.bind_port }}
+{% endif %}
+{% endif %}
+
+{% if guacd_config.ssl is defined %}
+[ssl]
+{% if guacd_config.ssl.server_certificate is defined %}
+server_certificate = {{ guacd_config.ssl.server_certificate }}
+{% endif %}
+{% if guacd_config.ssl.server_key is defined %}
+server_key = {{ guacd_config.ssl.server_key }}
+{% endif %}
+{% endif %}

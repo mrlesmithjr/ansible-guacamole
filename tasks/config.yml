@@ -12,6 +12,19 @@
     - /etc/guacamole/lib
     - /etc/guacamole/extensions
 
+- name: config | Configuring guacd
+  ansible.builtin.template:
+    src: etc/guacamole/guacd.conf.j2
+    dest: /etc/guacamole/guacd.conf
+    owner: "{{ guacamole_tomcat_user }}"
+    group: "{{ guacamole_tomcat_user }}"
+    mode: u=rw,g=r,o=r
+  become: true
+  notify:
+    - kill guacd
+    - restart guacd
+  when: guacd_config is defined
+
 - name: config | Configuring guacamole.properties
   ansible.builtin.template:
     src: etc/guacamole/guacamole.properties.j2
