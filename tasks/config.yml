@@ -259,3 +259,10 @@
     - "restart {{ guacamole_tomcat_service }}"
     - kill guacd
     - restart guacd
+
+- name: Update index.hmtl of ROOT in tomcat to redirect to guacamole webapps # noqa no-handler risky-file-permissions
+  ansible.builtin.copy:
+    content: "<meta http-equiv='Refresh' content=\"0; url='{{ guacamole_redirect }}'\"/>"
+    dest: "{{ '/var/lib/' + guacamole_tomcat + '/webapps/ROOT/index.html' }}"
+  when: guacamole_redirect is defined
+  become: true
