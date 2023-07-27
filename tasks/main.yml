@@ -26,3 +26,7 @@
 - name: Manage Guacamole LDAP authentication
   ansible.builtin.include_tasks: ldap.yml
   when: guacamole_ldap is defined
+
+- name: Manage Guacamole TOTP configurations
+  ansible.builtin.include_tasks: totp.yml
+  when: guacamole_totp | default(false) | bool

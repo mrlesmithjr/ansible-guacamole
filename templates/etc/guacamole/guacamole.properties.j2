@@ -14,6 +14,12 @@ mysql-port: {{ guacamole_mysql_db['port'] }}
 mysql-database: {{ guacamole_mysql_db['name'] }}
 mysql-username: {{ guacamole_mysql_db['username'] }}
 mysql-password: {{ guacamole_mysql_db['password'] }}
+{% if guacamole_mysql_db['sslmode'] is defined %}
+mysql-ssl-mode: {{ guacamole_mysql_db['sslmode'] }}
+{% endif %}
+{% if guacamole_mysql_db['timezone'] is defined %}
+mysql-server-timezone: {{ guacamole_mysql_db['timezone'] }}
+{% endif %}
 {% endif %}
 {% if guacamole_postgresql_auth %}
 postgresql-hostname: {{ guacamole_postgresql_db['host'] }}

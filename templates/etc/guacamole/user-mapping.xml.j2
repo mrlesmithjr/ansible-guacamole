@@ -8,7 +8,9 @@
         <connection name="{{ connection['name'] }}">
             <protocol>{{ connection['protocol'] }}</protocol>
             <param name="hostname">{{ connection['host'] }}</param>
+{%           if connection['port'] is defined %}
             <param name="port">{{ connection['port'] }}</param>
+{%           endif %}
 {%         if connection['protocol'] == "rdp" %}
             <param name="color-depth">{{ guacamole_rdp_color_depth }}</param>
             <param name="security">{{ guacamole_rdp_security }}</param>
@@ -24,6 +26,9 @@
 {%         if connection['protocol'] == "ssh" %}
 {%           if connection['private_key'] is defined %}
             <param name="private-key">{{ connection['private_key'] }}</param>
+{%           endif %}
+{%           if connection['enable_sftp'] is defined %}
+            <param name="enable-sftp">{{ connection['enable_sftp'] }}</param>
 {%           endif %}
 {%         endif %}
         </connection>

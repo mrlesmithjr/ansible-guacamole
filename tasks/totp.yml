@@ -1,0 +1,20 @@
+---
+# Documentation : https://guacamole.apache.org/doc/gug/totp-auth.html
+
+- name: config | Downloading Auth TOTP Library
+  ansible.builtin.unarchive:
+    src: "{{ guacamole_dl_url + '/binary/' + guacamole_auth_totp_package }}"
+    dest: "{{ guacamole_src_dir }}"
+    remote_src: true
+  become: true
+
+- name: config | Copying Auth TOTP Connector  # noqa risky-file-permissions
+  ansible.builtin.copy:
+    src: "{{ guacamole_src_dir + '/' + 'guacamole-auth-totp-' + guacamole_version + '/' + 'guacamole-auth-totp-' + guacamole_version + '.jar' }}"
+    dest: /etc/guacamole/extensions/
+    owner: "{{ guacamole_tomcat_user }}"
+    group: "{{ guacamole_tomcat_user }}"
+    remote_src: true
+  become: true
+  notify:
+    - "restart {{ guacamole_tomcat_service }}"

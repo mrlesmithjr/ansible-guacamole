@@ -12,6 +12,19 @@
     - /etc/guacamole/lib
     - /etc/guacamole/extensions
 
+- name: config | Configuring guacd
+  ansible.builtin.template:
+    src: etc/guacamole/guacd.conf.j2
+    dest: /etc/guacamole/guacd.conf
+    owner: "{{ guacamole_tomcat_user }}"
+    group: "{{ guacamole_tomcat_user }}"
+    mode: u=rw,g=r,o=r
+  become: true
+  notify:
+    - kill guacd
+    - restart guacd
+  when: guacd_config is defined
+
 - name: config | Configuring guacamole.properties
   ansible.builtin.template:
     src: etc/guacamole/guacamole.properties.j2
@@ -37,7 +50,7 @@
     - "restart {{ guacamole_tomcat_service }}"
     - kill guacd
     - restart guacd
-  when: not guacamole_mysql_auth and not guacamole_postgresql_auth
+  when: guacamole_users is defined and guacamole_users | list | length >= 1
 
 - name: config | Downloading Auth JDBC Library
   ansible.builtin.unarchive:
@@ -77,7 +90,7 @@
 
 - name: config | Copying MySQL Connector # noqa risky-file-permissions
   ansible.builtin.copy:
-    src: "{{ guacamole_src_dir + '/' + 'mysql-connector-java-' + guacamole_mysql_connector_version + '/' + 'mysql-connector-java-' + guacamole_mysql_connector_version + '.jar' }}"
+    src: "{{ guacamole_src_dir + '/' + 'mysql-connector-j-' + guacamole_mysql_connector_version + '/' + 'mysql-connector-j-' + guacamole_mysql_connector_version + '.jar' }}"
     dest: /etc/guacamole/lib/
     owner: "{{ guacamole_tomcat_user }}"
     group: "{{ guacamole_tomcat_user }}"
@@ -246,3 +259,10 @@
     - "restart {{ guacamole_tomcat_service }}"
     - kill guacd
     - restart guacd
+
+- name: Update index.hmtl of ROOT in tomcat to redirect to guacamole webapps # noqa no-handler risky-file-permissions
+  ansible.builtin.copy:
+    content: "<meta http-equiv='Refresh' content=\"0; url='{{ guacamole_redirect }}'\"/>"
+    dest: "{{ '/var/lib/' + guacamole_tomcat + '/webapps/ROOT/index.html' }}"
+  when: guacamole_redirect is defined
+  become: true
