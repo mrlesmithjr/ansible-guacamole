@@ -133,6 +133,21 @@
   become: true
   when: guacamole_openid_auth
 
+- name: config | list previous extensions version
+  ansible.builtin.find:
+    paths: "/etc/guacamole/extensions/"
+    excludes: '*{{ guacamole_version }}*'
+    file_type: file
+  register: guacamole_previous_extensions
+
+- name: config | Delete previous extensions version
+  ansible.builtin.file:
+    path: "{{ guacamole_extensions.path }}"
+    state: absent
+  loop: "{{ guacamole_previous_extensions.files }}"
+  loop_control:
+    loop_var: guacamole_extensions
+
 - name: config | Creating Guacamole DB
   community.mysql.mysql_db:
     name: "{{ guacamole_mysql_db['name'] }}"
