@@ -100,3 +100,18 @@ ldap-max-referral-hops: {{ guacamole_ldap['max_referral_hops'] }}
 ldap-operation-timeout: {{ guacamole_ldap['operation_timeout'] }}
 {% endif %}
 {% endif %}
+{# TOTP Configuration #}
+{% if guacamole_totp is defined %}
+{% if guacamole_totp['issuer'] is defined %}
+totp-issuer: {{ guacamole_totp['issuer'] }}
+{% endif %}
+{% if guacamole_totp['digits'] is defined %}
+totp-digits: {{ guacamole_totp['digits'] }}
+{% endif %}
+{% if guacamole_totp['period'] is defined %}
+totp-period: {{ guacamole_totp['period'] }}
+{% endif %}
+{% if guacamole_totp['mode'] is defined %}
+totp-mode: {{ guacamole_totp['mode'] }}
+{% endif %}
+{% endif %}

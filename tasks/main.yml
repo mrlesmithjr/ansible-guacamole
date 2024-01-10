@@ -29,4 +29,4 @@
 
 - name: Manage Guacamole TOTP configurations
   ansible.builtin.include_tasks: totp.yml
-  when: guacamole_totp | default(false) | bool
+  when: guacamole_totp is defined

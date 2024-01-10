@@ -17,6 +17,14 @@ For any required Ansible roles, review:
 
 [defaults/main.yml](defaults/main.yml)
 
+### TOTP Configuration
+
+To enable Two factor authentification, create a variable `guacamole_totp`:
+```
+guacamole_totp:
+  issuer: 'guacamole.exemple.com'
+  period: 60
+```
 ## Dependencies
 
 ## Example Playbook
