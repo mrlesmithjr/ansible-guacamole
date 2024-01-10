@@ -14,11 +14,11 @@
 
 - name: install | Checking If Guacamole Server Is Installed
   ansible.builtin.stat:
-    path: /usr/local/sbin/guacd
+    path: /usr/local/bin/guaclog
   register: _guacamole_server_installed
 
 - name: install | Configuring Guacamole Server Build # noqa no-changed-when
-  ansible.builtin.command: ./configure --with-init-dir=/etc/init.d
+  ansible.builtin.command: "./configure --with-init-dir=/etc/init.d{% if guacd_config is not defined %} --disable-guacd{% endif %}"
   args:
     chdir: "{{ guacamole_src_dir + '/guacamole-server-' + guacamole_version }}"
   become: true
