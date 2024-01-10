@@ -1,13 +1,15 @@
 {{ ansible_managed | comment }}
 auth-provider: {{ guacamole_auth_provider }}
-{% if guacamole_basic_user_mapping is defined and guacamole_basic_user_mapping|string %}
+{# Basic User Mapping #}
+{% if guacamole_basic_user_mapping is defined and guacamole_users is defined and guacamole_users | list | length >= 1 %}
 basic-user-mapping: {{ guacamole_basic_user_mapping }}
 {% endif %}
+{# Network Configuration #}
 guacd-hostname: {{ guacamole_server_hostname }}
 {% if guacamole_server_port is defined and guacamole_server_port|int %}
 guacd-port: {{ guacamole_server_port }}
 {% endif %}
-user-mapping: /etc/guacamole/user-mapping.xml
+{# MySQL Configuration #}
 {% if guacamole_mysql_auth %}
 mysql-hostname: {{ guacamole_mysql_db['host'] }}
 mysql-port: {{ guacamole_mysql_db['port'] }}
@@ -21,6 +23,7 @@ mysql-ssl-mode: {{ guacamole_mysql_db['sslmode'] }}
 mysql-server-timezone: {{ guacamole_mysql_db['timezone'] }}
 {% endif %}
 {% endif %}
+{# PostGreSQL Configuration #}
 {% if guacamole_postgresql_auth %}
 postgresql-hostname: {{ guacamole_postgresql_db['host'] }}
 postgresql-port: {{ guacamole_postgresql_db['port'] }}
@@ -29,6 +32,7 @@ postgresql-username: {{ guacamole_postgresql_db['username'] }}
 postgresql-password: {{ guacamole_postgresql_db['password'] }}
 postgresql-auto-create-accounts: {{ guacamole_postgresql_db['auto-create-accounts'] }}
 {% endif %}
+{# OpenID Configuration #}
 {% if guacamole_openid_auth %}
 openid-authorization-endpoint: {{ guacamole_openid['authorization-endpoint'] }}
 openid-jwks-endpoint: {{ guacamole_openid['jwks-endpoint'] }}
@@ -39,6 +43,7 @@ openid-username-claim-type: {{ guacamole_openid['username-claim-type'] }}
 openid-groups-claim-type: {{ guacamole_openid['groups-claim-type'] }}
 openid-allowed-clock-skew: {{ guacamole_openid['allowed-clock-skew'] }}
 {% endif %}
+{# Ldap Configuration #}
 {% if guacamole_ldap is defined %}
 {# ldap-hostname is define in ldap-servers.yml to premit multiple ldap server #}
 {% if guacamole_ldap['port'] is defined %}
