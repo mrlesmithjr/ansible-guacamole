@@ -2,26 +2,40 @@
 - name: client | Downloading Guacamole Client Package # noqa risky-file-permissions
   ansible.builtin.get_url:
     url: "{{ guacamole_dl_url + '/binary/' + guacamole_client_package }}"
-    dest: /etc/guacamole/guacamole.war
+    dest: "{{ '/etc/guacamole/guacamole-' + guacamole_version + '.war' }}"
   become: true
   register: dl
   until: dl is success
 
 - name: client | Creating Tomcat Symlink For {{ 'guacamole-' + guacamole_version + '.war' }}
   ansible.builtin.file:
-    src: /etc/guacamole/guacamole.war
-    dest: "{{ '/var/lib/' + guacamole_tomcat + '/webapps/guacamole.war' }}"
+    src: "{{ '/etc/guacamole/guacamole-' + guacamole_version + '.war' }}"
+    dest: "{{ '/var/lib/' + guacamole_tomcat + '/webapps/guacamole##' + guacamole_version + '.war' }}"
     state: link
   become: true
   notify:
     - "restart {{ guacamole_tomcat_service }}"
     - kill guacd
     - restart guacd
+- name: client | list if any Previous guacamole deployed war
+  ansible.builtin.find:
+    paths: "{{ '/var/lib/' + guacamole_tomcat + '/webapps/' }}"
+    excludes: "{{ 'guacamole##' + guacamole_version + '.war' }}"
+    file_type: link
+  register: guacamole_previous_wars
+
+- name: client | Delete previous guacamole deployed war
+  ansible.builtin.file:
+    path: "{{ guacamole_previous_war.path }}"
+    state: absent
+  loop: "{{ guacamole_previous_wars.files }}"
+  loop_control:
+    loop_var: guacamole_previous_war
 
 # Moving here to ensure idempotency as it was failing when included above
 - name: client | Setting Permissions On Tomcat Symlink For {{ 'guacamole-' + guacamole_version + '.war' }}
   ansible.builtin.file:
-    path: /etc/guacamole/guacamole.war
+    path: "{{ '/etc/guacamole/guacamole-' + guacamole_version + '.war' }}"
     owner: "{{ guacamole_tomcat_user }}"
     group: "{{ guacamole_tomcat_user }}"
   become: true
