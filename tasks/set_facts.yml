@@ -95,6 +95,8 @@
       - libvncserver-dev
       - libvorbis-dev
       - libwebp-dev
+      - libwebsockets-dev
+      - libavformat-dev
   when:
     - ansible_distribution == "Debian"
     - ansible_distribution_version is version('9', '>=')
