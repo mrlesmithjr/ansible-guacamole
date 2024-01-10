@@ -10,6 +10,7 @@
     src: "{{ guacamole_src_dir + '/' + guacamole_server_package }}"
     dest: "{{ guacamole_src_dir }}"
     remote_src: true
+  register: extract
   become: true
 
 - name: install | Checking If Guacamole Server Is Installed
@@ -23,7 +24,7 @@
     chdir: "{{ guacamole_src_dir + '/guacamole-server-' + guacamole_version }}"
   become: true
   register: _guacamole_config_server_build
-  when: not _guacamole_server_installed['stat']['exists']
+  when: not _guacamole_server_installed['stat']['exists'] or extract.changed
 
 - name: install | Compiling Guacamole Server # noqa no-handler
   community.general.make:
