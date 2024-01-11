@@ -5,3 +5,4 @@
     enabled: true
     state: started
   become: true
+  when: guacd_config is defined
