@@ -178,3 +178,12 @@
       - uuid-devel
   when:
     - ansible_os_family == "RedHat"
+
+- name: set_facts | Fix guacamole 1.5.4 compile issue
+  ansible.builtin.set_fact:
+    guacamole_compile_environment:
+      LDFLAGS: '-lrt'
+  when:
+    - ansible_distribution == "Debian"
+    - ansible_distribution_version is version('9', '>=')
+    - guacamole_version == "1.5.4"
