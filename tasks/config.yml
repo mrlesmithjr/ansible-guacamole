@@ -148,11 +148,21 @@
   loop_control:
     loop_var: guacamole_extensions
 
+# Fix ansible-playbook failed issue
+#  "A MySQL module is required: for Python 2.7 either PyMySQL, or MySQL-python, or for Python 3.X mysqlclient or PyMySQL.
+- name: Install Python 3.X mysqlclient
+  package:
+    name: python3-mysqldb
+  become: true
+  when: guacamole_mysql_auth
+
 - name: config | Creating Guacamole DB
   community.mysql.mysql_db:
     name: "{{ guacamole_mysql_db['name'] }}"
     login_host: "{{ guacamole_mysql_db['host'] }}"
     login_port: "{{ guacamole_mysql_db['port'] }}"
+    login_user: "{{ guacamole_mysql_db['username'] | default(omit) }}"
+    login_password: "{{ guacamole_mysql_db['password'] | default(omit) }}"
     state: present
   become: true
   when: guacamole_mysql_auth
@@ -171,6 +181,8 @@
     password: "{{ guacamole_mysql_db['password'] }}"
     login_host: "{{ guacamole_mysql_db['host'] }}"
     login_port: "{{ guacamole_mysql_db['port'] }}"
+    login_user: "{{ guacamole_mysql_db['username'] | default(omit) }}"
+    login_password: "{{ guacamole_mysql_db['password'] | default(omit) }}"
     priv: "{{ guacamole_mysql_db['name'] + '.*:GRANT,SELECT,INSERT,UPDATE,DELETE' }}"
     state: present
   become: true
@@ -197,6 +209,8 @@
     name: "{{ guacamole_mysql_db['name'] }}"
     login_host: "{{ guacamole_mysql_db['host'] }}"
     login_port: "{{ guacamole_mysql_db['port'] }}"
+    login_user: "{{ guacamole_mysql_db['username'] | default(omit) }}"
+    login_password: "{{ guacamole_mysql_db['password'] | default(omit) }}"
     state: import
     target: "{{ guacamole_src_dir + '/' + 'guacamole-auth-jdbc-' + guacamole_version + '/mysql/schema/' + item }}"
   become: true
