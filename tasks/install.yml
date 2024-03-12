@@ -25,6 +25,8 @@
   become: true
   register: _guacamole_config_server_build
   when: not _guacamole_server_installed['stat']['exists'] or extract.changed
+  # Workarround for this bug in 1.5.4 : https://lists.apache.org/thread/h5zql3zdov0ngh8kp9r3yppcprq5z1jf
+  environment: "{{ guacamole_compile_environment | default(omit) }}"
 
 - name: install | Compiling Guacamole Server # noqa no-handler
   community.general.make:
@@ -32,6 +34,8 @@
   become: true
   register: _guacamole_server_compiled
   when: _guacamole_config_server_build['changed']
+  # Workarround for this bug in 1.5.4 : https://lists.apache.org/thread/h5zql3zdov0ngh8kp9r3yppcprq5z1jf
+  environment: "{{ guacamole_compile_environment | default(omit) }}"
 
 - name: install | Installing Guacamole Server # noqa no-handler
   community.general.make:
