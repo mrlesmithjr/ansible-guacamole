@@ -17,6 +17,7 @@
     - "restart {{ guacamole_tomcat_service }}"
     - kill guacd
     - restart guacd
+
 - name: client | list if any Previous guacamole deployed war
   ansible.builtin.find:
     paths: "{{ '/var/lib/' + guacamole_tomcat + '/webapps/' }}"
