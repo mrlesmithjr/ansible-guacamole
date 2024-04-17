@@ -115,7 +115,7 @@
   become: true
   when: guacamole_postgresql_auth
 
-- name: config | Downloading Auth OpenID Library
+- name: config | Downloading Auth SSO/OpenID Library
   ansible.builtin.unarchive:
     src: "{{ guacamole_dl_url + '/binary/' + guacamole_auth_openid_package }}"
     dest: "{{ guacamole_src_dir }}"
@@ -125,7 +125,7 @@
 
 - name: config | Copying Auth OpenID Connector # noqa risky-file-permissions
   ansible.builtin.copy:
-    src: "{{ guacamole_src_dir + '/' + 'guacamole-auth-openid-' + guacamole_version + '/' + 'guacamole-auth-openid-' + guacamole_version + '.jar' }}"
+    src: "{{ guacamole_src_dir + '/' + 'guacamole-auth-sso-' + guacamole_version + '/openid/' + 'guacamole-auth-sso-openid-' + guacamole_version + '.jar' }}"
     dest: "{{ '/etc/guacamole/extensions/' + guacamole_auth_openid_priority + 'guacamole-auth-openid-' + guacamole_version + '.jar' }}"
     owner: "{{ guacamole_tomcat_user }}"
     group: "{{ guacamole_tomcat_user }}"

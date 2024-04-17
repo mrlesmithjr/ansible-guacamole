@@ -18,8 +18,8 @@ guacamole_auth_ldap_package: "{{ 'guacamole-auth-ldap-' + guacamole_version + '.
 # Authentication TOPT
 guacamole_auth_totp_package: "{{ 'guacamole-auth-totp-' + guacamole_version + '.tar.gz' }}"
 
-# Authentication OpenID
-guacamole_auth_openid_package: "{{ 'guacamole-auth-openid-' + guacamole_version + '.tar.gz' }}"
+# Authentication OpenID (via SSO)
+guacamole_auth_openid_package: "{{ 'guacamole-auth-sso-' + guacamole_version + '.tar.gz' }}"
 
 guacamole_openid_auth: false
 
