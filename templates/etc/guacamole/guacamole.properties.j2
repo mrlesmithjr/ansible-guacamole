@@ -39,9 +39,24 @@ openid-jwks-endpoint: {{ guacamole_openid['jwks-endpoint'] }}
 openid-issuer: {{ guacamole_openid['issuer'] }}
 openid-client-id: {{ guacamole_openid['client-id'] }}
 openid-redirect-uri: {{ guacamole_openid['redirect-uri'] }}
+{% if guacamole_openid['username-claim-type'] is defined %}
 openid-username-claim-type: {{ guacamole_openid['username-claim-type'] }}
+{% endif %}
+{% if guacamole_openid['groups-claim-type'] is defined %}
 openid-groups-claim-type: {{ guacamole_openid['groups-claim-type'] }}
+{% endif %}
+{% if guacamole_openid['scope'] is defined %}
+openid-scope: {{ guacamole_openid['scope'] }}
+{% endif %}
+{% if guacamole_openid['allowed-clock-skew'] is defined %}
 openid-allowed-clock-skew: {{ guacamole_openid['allowed-clock-skew'] }}
+{% endif %}
+{% if guacamole_openid['max-token-validity'] is defined %}
+openid-max-token-validity: {{ guacamole_openid['max-token-validity'] }}
+{% endif %}
+{% if guacamole_openid['max-nonce-validity'] is defined %}
+openid-max-nonce-validity: {{ guacamole_openid['max-nonce-validity'] }}
+{% endif %}
 {% endif %}
 {# Ldap Configuration #}
 {% if guacamole_ldap is defined %}

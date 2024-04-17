@@ -25,6 +25,20 @@ guacamole_totp:
   issuer: 'guacamole.exemple.com'
   period: 60
 ```
+
+### OpenID Configuration
+
+To enable OpenID authentification, create :
+```
+guacamole_openid_auth: true
+guacamole_openid:
+  authorization-endpoint: https://idp.xxx.xx/realms/yyy/protocol/openid-connect/auth
+  jwks-endpoint: https://idp.xxx.xx/realms/yyy/protocol/openid-connect/certs
+  issuer: https://idp.xxx.xx/realms/yyy
+  client-id: remote
+  redirect-uri: https://remote.xxx.xx/guacamole
+```
+
 ## Dependencies
 
 ## Example Playbook
