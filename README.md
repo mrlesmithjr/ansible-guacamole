@@ -39,6 +39,17 @@ guacamole_openid:
   redirect-uri: https://remote.xxx.xx/guacamole
 ```
 
+### guacd Configuration
+
+guacd is the native server-side proxy used by the Apache Guacamole web application. If you wish to deploy Guacamole, or an application using the Guacamole core APIs, you will need a copy of guacd running.
+
+guacd is installed by default. To disable it, set `guacd_config.install` to `false`:
+
+```
+guacd_config:
+  install: false
+```
+
 ## Dependencies
 
 ## Example Playbook

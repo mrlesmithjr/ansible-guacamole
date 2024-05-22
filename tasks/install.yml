@@ -19,7 +19,7 @@
   register: _guacamole_server_installed
 
 - name: install | Configuring Guacamole Server Build # noqa no-changed-when
-  ansible.builtin.command: "./configure --with-init-dir=/etc/init.d{% if guacd_config is not defined %} --disable-guacd{% endif %}"
+  ansible.builtin.command: "./configure --with-init-dir=/etc/init.d{% if not guacd_config.install %} --disable-guacd{% endif %}"
   args:
     chdir: "{{ guacamole_src_dir + '/guacamole-server-' + guacamole_version }}"
   become: true
