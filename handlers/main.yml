@@ -3,14 +3,14 @@
 - name: kill guacd # noqa no-changed-when
   ansible.builtin.command: pkill guacd
   become: true
-  when: guacd_config is defined
+  when: guacd_config.install
 
 - name: restart guacd
   ansible.builtin.service:
     name: guacd
     state: restarted
   become: true
-  when: guacd_config is defined
+  when: guacd_config.install
 
 - name: restart tomcat
   ansible.builtin.service:

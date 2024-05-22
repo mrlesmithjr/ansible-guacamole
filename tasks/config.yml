@@ -23,7 +23,7 @@
   notify:
     - kill guacd
     - restart guacd
-  when: guacd_config is defined
+  when: guacd_config.install
 
 - name: config | Configuring guacamole.properties
   ansible.builtin.template:
