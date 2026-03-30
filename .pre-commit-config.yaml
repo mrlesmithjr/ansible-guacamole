@@ -14,7 +14,7 @@ repos:
         args: [--branch, develop, --branch, master, --branch, main]
       - id: trailing-whitespace
   - repo: https://github.com/ansible-community/ansible-lint
-    rev: v25.3.0
+    rev: v26.3.0
     hooks:
       - id: ansible-lint
         additional_dependencies:
