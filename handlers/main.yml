@@ -35,3 +35,9 @@
     name: tomcat9
     state: restarted
   become: true
+
+- name: restart tomcat10
+  ansible.builtin.service:
+    name: tomcat10
+    state: restarted
+  become: true

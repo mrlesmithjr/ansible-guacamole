@@ -7,10 +7,10 @@ dependency:
 driver:
   name: docker
 platforms:
-  - name: alpine313
-    image: mrlesmithjr/alpine:3.13
+  - name: ubuntu2404
+    image: mrlesmithjr/ubuntu:24.04
     privileged: true
-    command: /sbin/init
+    command: /lib/systemd/systemd
     # tmpfs:
     #   - /run
     #   - /tmp

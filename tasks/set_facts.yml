@@ -26,7 +26,7 @@
     ansible_distribution_version is version('18.04', '>=') and
     ansible_distribution_version is version('19.10', '<='))
 
-- name: set_facts | Setting Debian/Ubuntu Facts
+- name: set_facts | Setting Debian/Ubuntu Facts (tomcat9)
   ansible.builtin.set_fact:
     guacamole_freerdp: freerdp2-x11
     guacamole_freerdp_dev: freerdp2-dev
@@ -35,9 +35,24 @@
     guacamole_tomcat_user: tomcat
   when: >
     (ansible_distribution == "Debian" and
-    ansible_distribution_version is version('9', '>')) or
+    ansible_distribution_version is version('9', '>') and
+    ansible_distribution_version is version('13', '<')) or
     (ansible_distribution == "Ubuntu" and
-    ansible_distribution_version is version('19.10', '>='))
+    ansible_distribution_version is version('19.10', '>=') and
+    ansible_distribution_version is version('24.04', '<'))
+
+- name: set_facts | Setting Debian/Ubuntu Facts (tomcat10)
+  ansible.builtin.set_fact:
+    guacamole_freerdp: freerdp2-x11
+    guacamole_freerdp_dev: freerdp2-dev
+    guacamole_tomcat: tomcat10
+    guacamole_tomcat_service: tomcat10
+    guacamole_tomcat_user: tomcat
+  when: >
+    (ansible_distribution == "Debian" and
+    ansible_distribution_version is version('13', '>=')) or
+    (ansible_distribution == "Ubuntu" and
+    ansible_distribution_version is version('24.04', '>='))
 
 - name: set_facts | Setting RedHat Facts
   ansible.builtin.set_fact:
@@ -136,6 +151,7 @@
       - build-essential
       - "{{ guacamole_freerdp }}"
       - libavcodec-dev
+      - libavformat-dev
       - libavutil-dev
       - libcairo2-dev
       - "{{ guacamole_freerdp_dev }}"
@@ -151,6 +167,7 @@
       - libvncserver-dev
       - libvorbis-dev
       - libwebp-dev
+      - libwebsockets-dev
   when:
     - ansible_distribution == "Ubuntu"
     - ansible_distribution_version is version('18.04', '>=')
@@ -178,12 +195,3 @@
       - uuid-devel
   when:
     - ansible_os_family == "RedHat"
-
-- name: set_facts | Fix guacamole 1.5.4 compile issue
-  ansible.builtin.set_fact:
-    guacamole_compile_environment:
-      LDFLAGS: '-lrt'
-  when:
-    - ansible_distribution == "Debian"
-    - ansible_distribution_version is version('9', '>=')
-    - guacamole_version == "1.5.4"

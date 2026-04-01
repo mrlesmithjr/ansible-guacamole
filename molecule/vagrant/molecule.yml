@@ -6,10 +6,6 @@ dependency:
     role-file: requirements.yml
 driver:
   name: vagrant
-lint: |
-  yamllint .
-  ansible-lint
-  flake8
 platforms:
   - name: ubuntu2004
     box: bento/ubuntu-20.04-arm64
@@ -17,6 +13,8 @@ platforms:
     cpus: 2
 provisioner:
   name: ansible
+  env:
+    ANSIBLE_ROLES_PATH: "${MOLECULE_PROJECT_DIRECTORY}/.."
   playbooks:
     converge: ../shared/converge.yml
     prepare: ../shared/prepare.yml
