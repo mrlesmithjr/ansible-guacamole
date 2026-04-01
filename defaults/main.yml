@@ -8,7 +8,7 @@ guacamole_auth_provider: net.sourceforge.guacamole.net.basic.BasicFileAuthentica
 
 guacamole_client_package: "{{ 'guacamole-' + guacamole_version + '.war' }}"
 
-guacamole_dl_url: "{{ 'http://apache.org/dyn/closer.cgi?action=download&filename=guacamole/' + guacamole_version }}"
+guacamole_dl_url: "{{ 'https://downloads.apache.org/guacamole/' + guacamole_version }}"
 
 guacamole_server_hostname: localhost
 
@@ -32,7 +32,7 @@ guacamole_mysql_connector_package: "{{ guacamole_mysql_connector_dl_url + 'mysql
 
 guacamole_mysql_connector_dl_url: https://cdn.mysql.com//Downloads/Connector-J/
 
-guacamole_mysql_connector_version: 8.0.33
+guacamole_mysql_connector_version: 9.2.0
 
 # Defines if PostgreSQL DB should be used for authentication
 guacamole_postgresql_auth: false
@@ -109,8 +109,8 @@ guacamole_users: []
 #       port: 5901
 #       password: password
 # Define version to install
-# 0.9.13-incubating | 0.9.14 | 1.0.0 | 1.1.0
-guacamole_version: 1.1.0
+# 0.9.13-incubating | 0.9.14 | 1.0.0 | 1.1.0 | 1.5.4 | 1.6.0
+guacamole_version: 1.6.0
 
 guacd_config:
   install: true
