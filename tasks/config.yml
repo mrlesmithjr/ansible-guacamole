@@ -151,7 +151,7 @@
 # Fix ansible-playbook failed issue
 #  "A MySQL module is required: for Python 2.7 either PyMySQL, or MySQL-python, or for Python 3.X mysqlclient or PyMySQL.
 - name: Install Python 3.X mysqlclient
-  package:
+  ansible.builtin.package:
     name: python3-mysqldb
   become: true
   when: guacamole_mysql_auth
