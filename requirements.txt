@@ -29,6 +29,8 @@ click==8.3.1
     # via molecule
 cryptography==46.0.5
     # via ansible-core
+distro==1.9.0
+    # via selinux
 docker==7.1.0
     # via molecule-plugins
 enrich==1.2.7
@@ -68,7 +70,7 @@ pluggy==1.6.0
     # via molecule
 pycparser==3.0
     # via cffi
-pygments==2.19.2
+pygments==2.20.0
     # via rich
 pyyaml==6.0.3
     # via
@@ -94,6 +96,8 @@ rpds-py==0.30.0
     # via
     #   jsonschema
     #   referencing
+selinux==0.3.0
+    # via molecule-plugins
 subprocess-tee==0.4.2
     # via ansible-compat
 typing-extensions==4.15.0
