@@ -45,7 +45,9 @@ cryptography==46.0.5
 dill==0.4.1
     # via pylint
 distro==1.9.0
-    # via ansible-lint
+    # via
+    #   -c requirements.txt
+    #   ansible-lint
 filelock==3.25.2
     # via ansible-lint
 flake8==7.3.0
@@ -100,7 +102,7 @@ pycparser==3.0
     #   cffi
 pyflakes==3.4.0
     # via flake8
-pylint==4.0.5
+pylint==4.0.6
     # via -r requirements-dev.in
 pytokens==0.4.1
     # via black
