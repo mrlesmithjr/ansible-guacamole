@@ -326,3 +326,24 @@
     dest: "{{ '/var/lib/' + guacamole_tomcat + '/webapps/ROOT/index.html' }}"
   when: guacamole_redirect is defined
   become: true
+- name: Find All Custom extensions
+  local_action:
+    module: ansible.builtin.find
+    paths: roles/mrlesmithjr.guacamole/files/
+    patterns: '*.jar'
+  register: jar_file
+
+- name: config | Copying All Custom extensions # noqa risky-file-permissions
+  ansible.builtin.copy:
+    src: "{{ file.path }}"
+    dest: /etc/guacamole/extensions/
+    owner: "{{ guacamole_tomcat_user }}"
+    group: "{{ guacamole_tomcat_user }}"
+  become: true
+  loop: "{{ jar_file.files }}"
+  loop_control:
+    loop_var: file
+    label: "{{ file.path }}"
+  notify:
+    - "restart {{ guacamole_tomcat_service }}"
+  when: not (guacd_only | default (false) | bool)
