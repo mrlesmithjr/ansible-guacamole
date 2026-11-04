@@ -115,6 +115,25 @@
   when:
     - ansible_distribution == "Debian"
     - ansible_distribution_version is version('9', '>=')
+    - not (guacd_only | default (false) | bool)
+
+- name: set_facts | Setting Debian Packages
+  ansible.builtin.set_fact:
+    guacamole_debian_pre_reqs:
+      - build-essential
+      - pkg-config
+      - libpng-dev
+      - libjpeg-dev
+      - libcairo2-dev
+      - libssl-dev
+      - libssh2-1-dev
+      - libvncserver-dev
+      - "{{ guacamole_freerdp_dev }}"
+      - libpango1.0-dev
+  when:
+    - ansible_distribution == "Debian"
+    - ansible_distribution_version is version('9', '>=')
+    - guacd_only | default (false) | bool
 
 - name: set_facts | Setting Ubuntu Packages
   ansible.builtin.set_fact:

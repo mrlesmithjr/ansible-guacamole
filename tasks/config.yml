@@ -3,6 +3,18 @@
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
+    owner: root
+    group: root
+    mode: u=rwx,g=rx,o=rx
+  become: true
+  with_items:
+    - /etc/guacamole
+  when: guacd_only | default (false) | bool
+
+- name: config | Ensuring Guacamole Folders Exist
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
     owner: "{{ guacamole_tomcat_user }}"
     group: "{{ guacamole_tomcat_user }}"
     mode: u=rwx,g=rx,o=rx
@@ -11,6 +23,7 @@
     - /etc/guacamole
     - /etc/guacamole/lib
     - /etc/guacamole/extensions
+  when: not (guacd_only | default (false) | bool)
 
 - name: config | Configuring guacd
   ansible.builtin.template:
@@ -23,7 +36,20 @@
   notify:
     - kill guacd
     - restart guacd
-  when: guacd_config.install
+  when: guacd_config is defined and not (guacd_only | default (false) | bool)
+
+- name: config | Configuring guacd
+  ansible.builtin.template:
+    src: etc/guacamole/guacd.conf.j2
+    dest: /etc/guacamole/guacd.conf
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
+  become: true
+  notify:
+    - kill guacd
+    - restart guacd
+  when: guacd_config is defined and guacd_only | default (false) | bool
 
 - name: config | Configuring guacamole.properties
   ansible.builtin.template:
@@ -37,6 +63,7 @@
     - "restart {{ guacamole_tomcat_service }}"
     - kill guacd
     - restart guacd
+  when: not (guacd_only | default (false) | bool)
 
 - name: config | Configuring user-mapping.xml
   ansible.builtin.template:
@@ -288,6 +315,7 @@
     - "restart {{ guacamole_tomcat_service }}"
     - kill guacd
     - restart guacd
+  when: not (guacd_only | default (false) | bool)
 
 - name: Update index.hmtl of ROOT in tomcat to redirect to guacamole webapps # noqa no-handler risky-file-permissions
   ansible.builtin.copy:

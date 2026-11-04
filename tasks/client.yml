@@ -17,6 +17,7 @@
     - "restart {{ guacamole_tomcat_service }}"
     - kill guacd
     - restart guacd
+  when: not (guacd_only | default (false) | bool)
 
 - name: client | list if any Previous guacamole deployed war
   ansible.builtin.find:
@@ -40,3 +41,4 @@
     owner: "{{ guacamole_tomcat_user }}"
     group: "{{ guacamole_tomcat_user }}"
   become: true
+  when: not (guacd_only | default (false) | bool)
