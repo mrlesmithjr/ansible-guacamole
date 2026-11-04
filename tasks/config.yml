@@ -216,7 +216,7 @@
     priv: "{{ guacamole_mysql_db['name'] + '.*:GRANT,SELECT,INSERT,UPDATE,DELETE' }}"
     state: present
   become: true
-  when: guacamole_mysql_auth
+  when: guacamole_mysql_auth and guacamole_mysql_install | default(false)
 
 - name: config | Creating Guacamole DB User
   community.postgresql.postgresql_user:
