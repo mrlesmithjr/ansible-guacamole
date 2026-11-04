@@ -6,6 +6,7 @@
     src: "{{ guacamole_dl_url + '/binary/' + guacamole_auth_ldap_package }}"
     dest: "{{ guacamole_src_dir }}"
     remote_src: true
+    creates: "{{ guacamole_src_dir + '/' + 'guacamole-auth-ldap-' + guacamole_version }}"
   become: true
 
 - name: config | Copying Auth LDAP Connector  # noqa risky-file-permissions

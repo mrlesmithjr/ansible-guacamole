@@ -6,6 +6,7 @@
     src: "{{ guacamole_dl_url + '/binary/' + guacamole_auth_totp_package }}"
     dest: "{{ guacamole_src_dir }}"
     remote_src: true
+    creates: "{{ guacamole_src_dir + '/' + 'guacamole-auth-totp-' + guacamole_version }}"
   become: true
 
 - name: config | Copying Auth TOTP Connector  # noqa risky-file-permissions

@@ -84,6 +84,7 @@
     src: "{{ guacamole_dl_url + '/binary/' + guacamole_auth_jdbc_package }}"
     dest: "{{ guacamole_src_dir }}"
     remote_src: true
+    creates: "{{ guacamole_src_dir + '/' + 'guacamole-auth-jdbc-' + guacamole_version }}"
   become: true
   when: guacamole_mysql_auth or guacamole_postgresql_auth
 
@@ -112,6 +113,7 @@
     src: "{{ guacamole_mysql_connector_package }}"
     dest: "{{ guacamole_src_dir }}"
     remote_src: true
+    creates: "{{ guacamole_src_dir + '/' + 'mysql-connector-j-' + guacamole_mysql_connector_version }}"
   become: true
   when: guacamole_mysql_auth
 
@@ -147,6 +149,7 @@
     src: "{{ guacamole_dl_url + '/binary/' + guacamole_auth_openid_package }}"
     dest: "{{ guacamole_src_dir }}"
     remote_src: true
+    creates: "{{ guacamole_src_dir + '/' + 'guacamole-auth-sso-' + guacamole_version }}"
   become: true
   when: guacamole_openid_auth
 

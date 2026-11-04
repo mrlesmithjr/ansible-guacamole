@@ -10,6 +10,7 @@
     src: "{{ guacamole_src_dir + '/' + guacamole_server_package }}"
     dest: "{{ guacamole_src_dir }}"
     remote_src: true
+    creates: "{{ guacamole_src_dir + '/' + 'guacamole-server-' + guacamole_version }}"
   register: extract
   become: true
 
